@@ -1,0 +1,94 @@
+---
+import type { Lang } from '../i18n'
+import { t } from '../i18n'
+import ObfuscatedEmail from './ObfuscatedEmail.astro'
+import SocialLinks from './SocialLinks.astro'
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+
+const navLinks = [
+    { key: 'home', slug: '' },
+    { key: 'dragon', slug: 'el-drac' },
+    { key: 'small_dragon', slug: 'el-drac-petit' },
+    { key: 'friends', slug: 'els-amics-del-drac' },
+    { key: 'history_origins', slug: 'historia/origens' },
+    { key: 'events', slug: 'esdeveniments' },
+    { key: 'shop', slug: 'botiga' },
+    { key: 'contact', slug: 'contacte' },
+]
+
+const currentYear = new Date().getFullYear()
+---
+
+<footer class="bg-bg-elevated border-t border-border mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+
+            <!-- Col 1: Entity info -->
+            <div>
+                <a href={`/${lang}/`} class="font-display font-black text-xl leading-none block mb-4">
+                    <span class="text-accent">Drac</span><span class="text-text"> de Vilafranca</span>
+                </a>
+                <p class="text-text-muted text-sm leading-relaxed mb-4">
+                    {t(lang, 'footer.entity')}
+                </p>
+                <address class="not-italic text-sm text-text-subtle space-y-1">
+                    <p>{t(lang, 'footer.address')}</p>
+                    <p>{t(lang, 'footer.city')}</p>
+                    <p>
+                        <ObfuscatedEmail class="hover:text-text-muted transition-colors duration-200" />
+                    </p>
+                </address>
+            </div>
+
+            <!-- Col 2: Navigation -->
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-4">
+                    {t(lang, 'footer.links_title')}
+                </h3>
+                <nav aria-label={t(lang, 'footer.links_title')}>
+                    <ul class="space-y-2">
+                        {navLinks.map(({ key, slug }) => (
+                            <li>
+                                <a
+                                    href={slug ? `/${lang}/${slug}` : `/${lang}/`}
+                                    class="text-sm text-text-muted hover:text-text transition-colors duration-200"
+                                >
+                                    {t(lang, `nav.${key}`)}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Col 3: Social media -->
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-4">
+                    {t(lang, 'footer.follow_us')}
+                </h3>
+                <SocialLinks />
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Copyright bar -->
+    <div class="border-t border-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p class="text-xs text-text-subtle">
+                © {currentYear} {t(lang, 'footer.entity')}. {t(lang, 'footer.rights')}.
+            </p>
+            <a
+                href={`/${lang}/privacitat`}
+                class="text-xs text-text-subtle hover:text-text-muted transition-colors duration-200"
+            >
+                {t(lang, 'footer.privacy')}
+            </a>
+        </div>
+    </div>
+</footer>

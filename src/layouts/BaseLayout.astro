@@ -1,0 +1,107 @@
+---
+import '../styles/app.css'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import CartDrawer from '../components/CartDrawer.astro'
+import { t, getAlternateUrls } from '../i18n'
+import type { Lang } from '../i18n'
+
+interface Props {
+    lang: Lang
+    title: string
+    description?: string
+    ogImage?: string
+}
+
+const { lang, title, description, ogImage = '/images/hero-bg.jpg' } = Astro.props
+
+const siteTitle = 'Drac de Vilafranca del Penedès'
+const metaDescription = description || (t(lang, 'site.description') as string)
+const fullTitle = title === siteTitle ? siteTitle : `${title} — ${siteTitle}`
+
+const canonicalURL = Astro.url.href
+const ogImageURL = Astro.site ? new URL(ogImage, Astro.site).href : ogImage
+
+const alternates = getAlternateUrls(Astro.url.pathname).map(({ lang: l, url }) => ({
+    lang: l,
+    href: Astro.site ? new URL(url, Astro.site).href : url,
+}))
+const xDefault = Astro.site ? new URL('/ca/', Astro.site).href : '/ca/'
+
+const ogLocale = lang === 'ca' ? 'ca_ES' : lang === 'es' ? 'es_ES' : 'en_GB'
+
+const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Amics del Drac de Vilafranca del Penedès',
+    url: 'https://www.dracdevilafranca.com',
+    logo: 'https://www.dracdevilafranca.com/favicon.svg',
+    sameAs: [
+        'https://www.facebook.com/dracdevilafranca',
+        'https://www.instagram.com/dracdevilafranca',
+    ],
+    address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Vilafranca del Penedès',
+        addressRegion: 'Catalunya',
+        addressCountry: 'ES',
+    },
+}
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{fullTitle}</title>
+        <meta name="description" content={metaDescription} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalURL} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+        <!-- hreflang alternates -->
+        {alternates.map(({ lang: l, href }) => (
+            <link rel="alternate" hreflang={l} href={href} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={xDefault} />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={fullTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={ogImageURL} />
+        <meta property="og:locale" content={ogLocale} />
+        <meta property="og:site_name" content={siteTitle} />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@Drac_Vilafranca" />
+        <meta name="twitter:title" content={fullTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={ogImageURL} />
+
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+        <!-- Google Fonts (display=swap for font-display: swap) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <a
+            href="#main-content"
+            class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-md focus:shadow-lg"
+        >
+            {t(lang, 'nav.skip_to_content')}
+        </a>
+        <Header lang={lang} />
+        <slot />
+        <Footer lang={lang} />
+        <CartDrawer lang={lang} />
+    </body>
+</html>

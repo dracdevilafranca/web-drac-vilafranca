@@ -1,0 +1,32 @@
+---
+interface Props {
+    src: string
+    alt: string
+    width: number
+    height: number
+    caption?: string
+    loading?: 'lazy' | 'eager'
+    smallCaption?: boolean
+    imageClass?: string
+}
+
+const { src, alt, width, height, caption, loading = 'lazy', smallCaption = false, imageClass = '' } = Astro.props
+---
+
+<figure>
+    <div class:list={['overflow-hidden rounded-lg border border-border bg-bg-card', imageClass]}>
+        <img
+            src={src}
+            alt={alt}
+            class="w-full h-auto object-cover"
+            loading={loading}
+            width={width}
+            height={height}
+        />
+    </div>
+    {caption && (
+        <figcaption class:list={['text-text-subtle italic text-center mt-2', smallCaption ? 'text-xs' : 'text-sm']}>
+            {caption}
+        </figcaption>
+    )}
+</figure>

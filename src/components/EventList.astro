@@ -1,0 +1,131 @@
+---
+import type { Lang } from '../i18n'
+import { t } from '../i18n'
+
+interface Props {
+    lang: Lang
+    limit?: number
+    showPast?: boolean
+    onlyPast?: boolean
+}
+
+const { lang, limit, showPast = false, onlyPast = false } = Astro.props
+
+const i18n = {
+    loading: t(lang, 'events.loading'),
+    error: t(lang, 'events.error'),
+    no_upcoming: t(lang, 'events.no_upcoming'),
+    no_past: t(lang, 'events.no_past'),
+    past_title: t(lang, 'events.past_title'),
+}
+
+const config = { lang, limit: limit ?? null, showPast, onlyPast }
+---
+
+<div class="event-list" data-config={JSON.stringify(config)} data-i18n={JSON.stringify(i18n)}>
+    <p class="text-text-muted text-sm">{t(lang, 'events.loading')}</p>
+</div>
+
+<script>
+    function localeFor(lang: string) {
+        return lang === 'ca' ? 'ca-ES' : lang === 'es' ? 'es-ES' : 'en-GB'
+    }
+
+    function formatDay(dateStr: string) {
+        return new Date(dateStr + 'T12:00:00').getDate()
+    }
+
+    function formatMonth(dateStr: string, lang: string) {
+        return new Date(dateStr + 'T12:00:00')
+            .toLocaleDateString(localeFor(lang), { month: 'short' })
+            .replace('.', '')
+    }
+
+    function formatYear(dateStr: string) {
+        return new Date(dateStr + 'T12:00:00').getFullYear()
+    }
+
+    function escapeHtml(str: string) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+    }
+
+    function renderCard(event: any, lang: string, isPast = false) {
+        const title = escapeHtml(event.title?.[lang] || event.title?.ca || '')
+        const desc = escapeHtml(event.description?.[lang] || event.description?.ca || '')
+        const loc = escapeHtml(event.location?.[lang] || event.location?.ca || '')
+        const day = formatDay(event.date)
+        const month = formatMonth(event.date, lang)
+        const year = formatYear(event.date)
+        const pastClass = isPast ? 'opacity-50' : ''
+
+        return `
+            <article class="flex gap-4 bg-bg-card border border-border rounded-lg p-4 hover:border-border-light transition-colors duration-200 ${pastClass}">
+                <time datetime="${escapeHtml(event.date)}" class="shrink-0 flex flex-col items-center justify-center w-12 text-center border-r border-border pr-4">
+                    <span class="text-gold font-bold text-2xl leading-none">${day}</span>
+                    <span class="text-text-subtle text-xs uppercase tracking-wide mt-0.5">${month}</span>
+                    <span class="text-text-subtle text-xs">${year}</span>
+                </time>
+                <div class="flex-1 min-w-0">
+                    <h3 class="font-display font-semibold text-text leading-tight">${title}</h3>
+                    ${desc ? `<p class="text-text-muted text-sm mt-1 line-clamp-2">${desc}</p>` : ''}
+                    ${loc ? `<p class="text-text-subtle text-xs mt-2 flex items-center gap-1"><span aria-hidden="true">📍</span>${loc}</p>` : ''}
+                </div>
+            </article>
+        `
+    }
+
+    document.querySelectorAll<HTMLElement>('.event-list').forEach(async (el) => {
+        const config = JSON.parse(el.dataset.config || '{}')
+        const i18n = JSON.parse(el.dataset.i18n || '{}')
+        const { lang, limit, showPast, onlyPast } = config
+
+        let events: any[] = []
+        try {
+            const res = await fetch('/data/events.json')
+            if (!res.ok) throw new Error('fetch failed')
+            events = (await res.json()).events || []
+        } catch {
+            el.innerHTML = `<p class="text-accent text-sm">${i18n.error}</p>`
+            return
+        }
+
+        const today = new Date()
+        today.setHours(0, 0, 0, 0)
+
+        const future = events
+            .filter((e) => new Date(e.date + 'T12:00:00') >= today)
+            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+
+        const past = events
+            .filter((e) => new Date(e.date + 'T12:00:00') < today)
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+        const shown = limit ? future.slice(0, limit) : future
+
+        let html = '<div class="flex flex-col gap-3">'
+
+        if (onlyPast) {
+            // Show only past events
+            if (past.length === 0) {
+                html += `<p class="text-text-muted text-sm py-4">${i18n.no_past}</p>`
+            } else {
+                html += past.map((e) => renderCard(e, lang, true)).join('')
+            }
+        } else {
+            // Show upcoming (+ optionally past below)
+            if (shown.length === 0) {
+                html += `<p class="text-text-muted text-sm py-4">${i18n.no_upcoming}</p>`
+            } else {
+                html += shown.map((e) => renderCard(e, lang)).join('')
+            }
+
+            if (showPast && past.length > 0) {
+                html += `<h3 class="text-xs font-bold uppercase tracking-widest text-text-subtle mt-8 mb-3">${i18n.past_title}</h3>`
+                html += past.map((e) => renderCard(e, lang, true)).join('')
+            }
+        }
+
+        html += '</div>'
+        el.innerHTML = html
+    })
+</script>

@@ -1,0 +1,28 @@
+# Cloudflare Pages – Security + Cache headers
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'
+
+# Cache headers
+
+# Productes: cache curt perquè canvien sense redeploy
+/data/products.json
+  Cache-Control: max-age=0, must-revalidate
+
+# Galeria: sense cache per reflectir canvis immediats
+/gallery/list.json
+  Cache-Control: max-age=0, must-revalidate
+
+# Assets amb hash (Vite): cache permanent — el hash canvia si el contingut canvia
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Imatges i galeria: cache d'un dia
+/images/*
+  Cache-Control: public, max-age=86400
+/gallery/*
+  Cache-Control: public, max-age=86400

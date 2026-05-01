@@ -1,0 +1,12 @@
+name = "drac-vilafranca-web"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-01-01"
+
+# RESEND_API_KEY (secret — never put the real value here)
+# Add via CLI:       npx wrangler pages secret put RESEND_API_KEY
+# Add via dashboard: Cloudflare Pages → Settings → Environment variables → Add variable (type: Secret)
+
+# Local development with Workers functions:
+#   1. npm run build     (generates dist/)
+#   2. npm run pages:dev (starts server on port 4322 with functions active)
+# Note: /api/reserva returns 500 without RESEND_API_KEY — expected when running locally without the key.

@@ -1,0 +1,88 @@
+---
+import type { Lang } from '../i18n'
+import { t } from '../i18n'
+
+interface Props {
+    lang: Lang
+    current: string   // slug: 'origens' | 'segle-xvii' | ...
+    compact?: boolean // only show prev/next, skip the dot visualization
+}
+
+const { lang, current, compact = false } = Astro.props
+
+const centuries = [
+    { slug: 'origens',     title: t(lang, 'history.origins.title') as string },
+    { slug: 'segle-xvii',  title: t(lang, 'history.s17.title') as string },
+    { slug: 'segle-xviii', title: t(lang, 'history.s18.title') as string },
+    { slug: 'segle-xix',   title: t(lang, 'history.s19.title') as string },
+    { slug: 'segle-xx',    title: t(lang, 'history.s20.title') as string },
+    { slug: 'segle-xxi',   title: t(lang, 'history.s21.title') as string },
+]
+
+const idx = centuries.findIndex((c) => c.slug === current)
+const prev = idx > 0 ? centuries[idx - 1] : null
+const next = idx < centuries.length - 1 ? centuries[idx + 1] : null
+---
+
+<nav aria-label={t(lang, 'history.title')} class="mb-10">
+
+    {!compact && (
+        <div class="overflow-x-auto -mx-4 px-4 pb-2">
+            <div class="relative flex items-start justify-between min-w-[440px]">
+                <!-- Connecting line -->
+                <div class="absolute top-[7px] inset-x-0 h-px bg-border z-0"></div>
+
+                {centuries.map((c) => {
+                    const isCurrent = c.slug === current
+                    return (
+                        <div class="relative z-10 flex flex-col items-center" style="max-width:72px">
+                            <div class:list={[
+                                'w-[15px] h-[15px] rounded-full border-2',
+                                isCurrent ? 'bg-gold border-gold' : 'bg-bg border-border-light',
+                            ]} />
+                            <a
+                                href={`/${lang}/historia/${c.slug}`}
+                                aria-current={isCurrent ? 'page' : undefined}
+                                class:list={[
+                                    'mt-2 text-[11px] text-center leading-snug block',
+                                    isCurrent
+                                        ? 'text-gold font-semibold'
+                                        : 'text-text-subtle hover:text-text-muted transition-colors duration-200',
+                                ]}
+                            >
+                                {c.title}
+                            </a>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )}
+
+    <!-- Prev / Next -->
+    {(prev || next) && (
+        <div class:list={[
+            'flex justify-between items-center pt-5 border-t border-border',
+            compact ? 'mt-0' : 'mt-8',
+        ]}>
+            {prev ? (
+                <a
+                    href={`/${lang}/historia/${prev.slug}`}
+                    class="flex items-center gap-2 text-sm text-text-muted hover:text-text transition-colors duration-200 group"
+                >
+                    <span class="group-hover:-translate-x-0.5 transition-transform duration-200">←</span>
+                    <span>{prev.title}</span>
+                </a>
+            ) : <span />}
+            {next ? (
+                <a
+                    href={`/${lang}/historia/${next.slug}`}
+                    class="flex items-center gap-2 text-sm text-text-muted hover:text-text transition-colors duration-200 group"
+                >
+                    <span>{next.title}</span>
+                    <span class="group-hover:translate-x-0.5 transition-transform duration-200">→</span>
+                </a>
+            ) : <span />}
+        </div>
+    )}
+</nav>

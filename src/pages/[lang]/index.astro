@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import EventList from '../../components/EventList.astro'
+import { getStaticLangPaths, t } from '../../i18n'
+import type { Lang } from '../../i18n'
+
+export function getStaticPaths() {
+    return getStaticLangPaths()
+}
+
+const { lang } = Astro.params as { lang: Lang }
+---
+
+<BaseLayout lang={lang} title={t(lang, 'site.title')} description={t(lang, 'site.description')}>
+
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img
+                src="/images/hero-bg.jpg"
+                alt=""
+                aria-hidden="true"
+                class="w-full h-full object-cover object-center opacity-40"
+            />
+            <div class="absolute inset-0 bg-linear-to-b from-bg/60 via-bg/20 to-bg"></div>
+            <div class="absolute inset-0 bg-linear-to-r from-bg/50 via-transparent to-bg/50"></div>
+        </div>
+
+        <canvas id="sparks-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-1" aria-hidden="true"></canvas>
+
+        <div class="relative z-10 text-center px-4" style="animation: var(--animate-fade-in-up)">
+            <div class="h-px w-24 bg-linear-to-r from-transparent via-accent to-transparent mx-auto mb-10"></div>
+            <h1 class="font-display font-black text-text leading-none tracking-tight">
+                <span class="block text-6xl sm:text-8xl md:text-9xl">el DRAC</span>
+            </h1>
+            <p class="font-display text-gold text-xl sm:text-2xl md:text-3xl mt-4 tracking-wide">
+                de Vilafranca del Penedès
+            </p>
+            <div class="h-px w-24 bg-linear-to-r from-transparent via-gold to-transparent mx-auto mt-10"></div>
+
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                    href={`/${lang}/el-drac`}
+                    class="px-6 py-3 bg-accent text-white font-semibold rounded-md hover:bg-accent-hover transition-colors duration-200 text-sm"
+                >
+                    {t(lang, 'nav.dragon')}
+                </a>
+                <a
+                    href={`/${lang}/historia/origens`}
+                    class="px-6 py-3 border border-border-light text-text-muted hover:text-text hover:border-gold transition-colors duration-200 text-sm rounded-md"
+                >
+                    {t(lang, 'history.title')}
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-40">
+            <div class="w-5 h-8 border border-border-light rounded-full flex items-start justify-center pt-1.5">
+                <div class="w-0.5 h-2 bg-text-muted rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            <div>
+                <div class="h-0.5 w-16 bg-linear-to-r from-accent to-gold mb-6"></div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-text mb-6">
+                    {t(lang, 'home.intro.title')}
+                </h2>
+                <p class="text-text-muted leading-relaxed text-lg">
+                    {t(lang, 'home.intro.text')}
+                </p>
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <a
+                        href={`/${lang}/el-drac`}
+                        class="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-hover font-semibold transition-colors duration-200"
+                    >
+                        {t(lang, 'nav.dragon')} →
+                    </a>
+                    <span class="text-border">|</span>
+                    <a
+                        href={`/${lang}/els-amics-del-drac`}
+                        class="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-hover font-semibold transition-colors duration-200"
+                    >
+                        {t(lang, 'nav.friends')} →
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <div class="overflow-hidden rounded-lg border border-border bg-bg-card">
+                    <img
+                        id="colla-photo"
+                        src="/images/colla-2023.jpg"
+                        alt={t(lang, 'home.intro.photo_caption')}
+                        class="w-full h-auto object-cover"
+                        loading="lazy"
+                        width="1024"
+                        height="734"
+                    />
+                </div>
+                <p id="colla-caption" data-base={t(lang, 'home.intro.photo_caption')} class="text-text-subtle text-sm italic text-center">
+                    {t(lang, 'home.intro.photo_caption')}
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="bg-bg-elevated border-t border-b border-border py-16 md:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex items-end justify-between mb-8">
+                <div>
+                    <div class="h-0.5 w-16 bg-linear-to-r from-accent to-gold mb-4"></div>
+                    <h2 class="text-3xl font-display font-bold text-text">
+                        {t(lang, 'home.events.title')}
+                    </h2>
+                </div>
+                <a
+                    href={`/${lang}/esdeveniments`}
+                    class="text-sm text-accent hover:text-accent-hover font-semibold transition-colors duration-200 shrink-0"
+                >
+                    {t(lang, 'home.events.see_all')} →
+                </a>
+            </div>
+
+            <EventList lang={lang} limit={3} showPast={false} />
+
+        </div>
+    </section>
+
+<script>
+    function initSparks() {
+        const rawCanvas = document.getElementById('sparks-canvas')
+        if (!(rawCanvas instanceof HTMLCanvasElement)) return
+        const canvas: HTMLCanvasElement = rawCanvas
+
+        const rawCtx = canvas.getContext('2d')
+        if (!rawCtx) return
+        const ctx: CanvasRenderingContext2D = rawCtx
+
+        const rawHero = canvas.closest('section')
+        if (!(rawHero instanceof HTMLElement)) return
+        const hero: HTMLElement = rawHero
+
+        function resize() {
+            canvas.width = hero.offsetWidth
+            canvas.height = hero.offsetHeight
+        }
+        resize()
+        window.addEventListener('resize', resize, { passive: true })
+
+        const COLORS = ['#ff4400', '#ff6600', '#ff8800', '#ffaa00', '#ffcc00']
+
+        interface Spark {
+            x: number; y: number
+            vx: number; vy: number
+            size: number; alpha: number
+            color: string; decay: number
+        }
+
+        function spawn(): Spark {
+            return {
+                x: Math.random() * canvas.width,
+                y: canvas.height * (0.4 + Math.random() * 0.6),
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: -(Math.random() * 0.9 + 0.3),
+                size: Math.random() * 2 + 0.5,
+                alpha: Math.random() * 0.5 + 0.3,
+                color: COLORS[Math.floor(Math.random() * COLORS.length)],
+                decay: Math.random() * 0.0025 + 0.0015,
+            }
+        }
+
+        const sparks: Spark[] = Array.from({ length: 70 }, () => {
+            const s = spawn()
+            s.y = Math.random() * canvas.height
+            return s
+        })
+
+        let raf: number
+        let running = false
+
+        function frame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+            if (sparks.length < 120 && Math.random() < 0.5) sparks.push(spawn())
+
+            for (let i = sparks.length - 1; i >= 0; i--) {
+                const s = sparks[i]
+                s.x += s.vx + (Math.random() - 0.5) * 0.12
+                s.y += s.vy
+                s.alpha -= s.decay
+
+                if (s.alpha <= 0 || s.y < -10) { sparks.splice(i, 1); continue }
+
+                ctx.save()
+                ctx.globalAlpha = s.alpha
+                ctx.fillStyle = s.color
+                ctx.shadowBlur = 7
+                ctx.shadowColor = s.color
+                ctx.beginPath()
+                ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2)
+                ctx.fill()
+                ctx.restore()
+            }
+
+            raf = requestAnimationFrame(frame)
+        }
+
+        function start() { if (!running && !document.hidden) { running = true; frame() } }
+        function stop()  { running = false; cancelAnimationFrame(raf) }
+
+        new IntersectionObserver((entries) => {
+            entries[0]?.isIntersecting ? start() : stop()
+        }, { threshold: 0.01 }).observe(hero)
+
+        document.addEventListener('visibilitychange', () => document.hidden ? stop() : start())
+    }
+
+    initSparks()
+</script>
+
+<script>
+    async function fetchGalleryList(): Promise<string[]> {
+        try {
+            const r = await fetch('/gallery/list.json')
+            if (r.ok) {
+                const data = await r.json()
+                return Array.isArray(data.files) ? data.files : []
+            }
+        } catch {}
+        return []
+    }
+
+    const img = document.getElementById('colla-photo') as HTMLImageElement | null
+    const cap = document.getElementById('colla-caption') as HTMLElement | null
+    if (img) {
+        fetchGalleryList().then((files) => {
+            if (!files.length) return
+            const latest = files[0]
+            const year = latest.replace(/\.\w+$/, '')
+            img.src = `/gallery/${latest}`
+            if (cap) cap.textContent = `${cap.dataset.base} · ${year}`
+        })
+    }
+</script>
+</BaseLayout>
