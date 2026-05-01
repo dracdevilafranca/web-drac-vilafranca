@@ -1,0 +1,260 @@
+{
+    "site": {
+        "title": "Drac de Vilafranca del Penedès",
+        "description": "Official website of els Amics del Drac de Vilafranca del Penedès. Discover the history, traditions and events of one of Catalonia's most emblematic festive figures."
+    },
+    "nav": {
+        "home": "Home",
+        "dragon": "the Dragon",
+        "small_dragon": "the Little Dragon",
+        "friends": "els Amics del Drac",
+        "history": "History",
+        "presentation": "Presentation",
+        "history_origins": "Origins",
+        "history_s17": "17th Century",
+        "history_s18": "18th Century",
+        "history_s19": "19th Century",
+        "history_s20": "20th Century",
+        "history_s21": "21st Century",
+        "events": "Events",
+        "contact": "Contact",
+        "skip_to_content": "Skip to content",
+        "open_menu": "Open menu",
+        "close_menu": "Close menu",
+        "language": "Language",
+        "main_nav": "Main navigation",
+        "mobile_nav": "Mobile navigation",
+        "shop": "Shop"
+    },
+    "home": {
+        "hero": {
+            "title": "el DRAC",
+            "subtitle": "de Vilafranca del Penedès"
+        },
+        "intro": {
+            "title": "The Drac de Vilafranca",
+            "text": "The Drac de Vilafranca is one of the oldest and most representative festive figures in Catalonia. With origins dating back to the 13th and 14th centuries, the Drac is an inseparable part of the Festa Major of Vilafranca del Penedès, filling the streets of the town with fire and excitement every 31st of August.",
+            "photo_caption": "La colla dels Amics del Drac"
+        },
+        "events": {
+            "title": "Upcoming events",
+            "see_all": "See all events"
+        }
+    },
+    "dragon": {
+        "title": "The Dragon",
+        "paragraphs": [
+            "The Dragon's body is formed by the head (made from a single piece of fig wood) and the rest of the trunk (wood, cardboard and horsehide) which over time has undergone various repairs, adding more recent artificial materials. The figure we see today has its most significant element in the head, and a body similar to a snake. After the neck, the body widens until reaching its maximum diameter at the belly, and from there it narrows to form the coiled tail, which ends in a red arrow. The bat wings are located on the upper part of the belly, and are made of a chipboard panel, smooth on the interior face and worked on the exterior. The entire body is first painted with a fire-resistant coating in a light green colour and subsequently with a layer of dark green mixed with linseed oil.",
+            "The mouth is entirely painted red, with off-white lips. On the lower jaw there are two holes used to fix the cruciform iron piece used to place the rockets, known as the fork. Similarly, on the wings and the tail there is another iron element with the same function. All of this allows the Dragon to perform with 18 rockets when it dances. To light the mouth rockets, a cotton wick made of three braided ropes is used. When it dances, a club is used to light the wing and tail rockets, which are raised up.",
+            "Its dimensions are: 395 cm in length, 110 cm in width, 135 cm in height, and weighing — including all the equipment it carries when appearing in public — 115.83 kg."
+        ],
+        "interior": {
+            "head_caption": "Inside the Dragon - Looking towards the head",
+            "tail_caption": "Inside the Dragon - Looking towards the tail"
+        }
+    },
+    "small_dragon": {
+        "title": "The Little Dragon",
+        "paragraphs": [
+            "Since the end of the 19th century, the Drac has had small replicas for children.",
+            "In the 1980s, when the Festa Major opened up to participation by the youngest, on some occasions the drac petit took part in the cercavila and processions.",
+            "Finally, with the institution of the Festa Major dels Petits, the figure of the Drac petit began to have its own space, with carriers suited to its size. Although in the early years the Drac petit was loaned by private individuals, in 1996 one was commissioned from the maker Dolors Sans, which is the one that appears today. It is built with fibreglass and weighs 25 kg.",
+            "The carriers are boys and girls between 8 and 14 years old. The musical accompaniment consists of flabiol and tamborí."
+        ]
+    },
+    "friends": {
+        "title": "Els Amics del Drac",
+        "history_title": "History of the formation",
+        "history_paragraphs": [
+            "With the arrival of democracy, the street was reclaimed as a festive space and at the same time a series of changes occurred in the functioning of the dances at the Festa Major of Vilafranca. Most groups began to perform free of charge.",
+            "Regarding the Drac, in 1979, one of the administrators proposed to a group of young people to join the Drac as a renewal of the colla and without pay, as other dances began to do from that year. That Festa Major, the colla of carriers was formed by the old dancers and the new group, with a flabiolaire as musician.",
+            "That same year, on 23rd September, the Drac de Vilafranca participated in the Mostra de Bèsties Fantàstiques held during the Mercè festivities in Barcelona, together with eight other dragons and three colles de diables. This show was the basis of the Correfoc that has been celebrated since 1981 in Barcelona.",
+            "In the first week of December 1979, the \"Amics del Drac\" were formed, a collective of carriers of the Drac de Vilafranca responsible for working around this figure and ensuring its proper use.",
+            "One of the first actions of the \"Amics del Drac\" came in 1982, when the exhibition \"El Drac\" could be seen at the Festa Major in the chapel of Sant Joan, between 28 August and 5 September.",
+            "Later, in 1984, the \"Amics del Drac\" together with the administrators of the Festa Major organised the show \"Bestiari fantàstic i popular de Catalunya\" at the Capella de Sant Joan, from 25 August to 2 September.",
+            "In the revival of the festival during the late 1970s and early 1980s, in 1981 the offering of the dances inside Santa Maria at the Mass on 30 August began. During this act, representatives of all the dances enter the church, and each year a different one performs in front of the altar. The drac did so in 1994, although it naturally danced the Fire Dance without rockets, to the sound of the flabiol.",
+            "In 1996, the Agrupació del Bestiari Festiu i Popular de Catalunya was established, an association of which the \"Amics del Drac\" of Vilafranca are founding members."
+        ],
+        "expo_caption": "Exhibition poster",
+        "gaudeamus_title": "Gaudeamus",
+        "gaudeamus_text": "Every year the \"Amics del Drac\" hold their gathering, which takes the name of Gaudeamus. A dinner to which all those who have been part of the colla are invited. During the event, a pregón is read, which each year is read by a different guest, to sing the praises of the Drac, whether for having been a carrier, having had some relationship with the Drac or the festival, or for being part of the world of popular and traditional culture in any of its aspects. At the end of the dinner, a gift is also presented which in some way always incorporates the image of the Drac.",
+        "gallery_title": "Photo album of the colla",
+        "board_title": "Current board",
+        "board": {
+            "president": "President: Anna Naharro",
+            "vicepresident": "Vice-president: Jordi Estragué Cabezas",
+            "secretary": "Secretary: Josep Andreu Amorós",
+            "treasurer": "Treasurer: Ramon Lluís Valls Acedo"
+        }
+    },
+    "history": {
+        "title": "History",
+        "subtitle": "Centuries of tradition and fire",
+        "centuries_label": "Centuries",
+        "nav_prev": "Previous century",
+        "nav_next": "Next century",
+        "origins": {
+            "title": "Origins",
+            "paragraphs": [
+                "Despite its uncertain origin, we could place the creation of the Drac de Vilafranca between the 13th and 14th centuries.",
+                "Historically, the Drac belonged to the Confraternity of Sant Miquel, founded in 1331, initially under the patronage of Sant Francesc, at the convent that the Franciscan monks had outside the urban centre of Vilafranca, on what is now Carrer de Sant Pere. This confraternity was made up of cobblers, packsaddle makers, tanners and curriers.",
+                "Shortly afterwards, the confraternity moved to the church of Santa Maria, and came under the patronage of Sant Miquel. In 1335 we find that the altar of Sant Miquel already had a benefice at Santa Maria. The chapel of the Confraternity of Sant Miquel Arcàngel, according to the pastoral visit of 1367, occupied the first chapel of the apse on the Epistle side. Subsequently, in 1584, we find it at the first chapel of the apse on the Gospel side, where today the chapel of the Blessed Sacrament is located.",
+                "The church, with the institution of Corpus Christi in the 13th century, incorporated different beast figures such as the eagle, the lion, the mulassa, the ox, the víbria, the cotonines and the dragon. Little by little these elements take on a life of their own, adopting their own symbolism and meaning, until they are finally incorporated into Catalan festive culture with a distinct function. Over time they came not only to accompany religious celebrations but also popular civil festivities.",
+                "Apart from the Corpus procession, throughout the rest of the year there were other special dates in Vilafranca. In 1562, the feast of the Virgin of the Assumption began to be celebrated on 15 August, which until the Festa Major in honour of Sant Fèlix was established in the 18th century, was the most important festival of the year together with Corpus Christi."
+            ],
+            "auca_drac_caption": "Auca del Drac",
+            "auca_aliga_caption": "Auca de l'Àliga"
+        },
+        "s17": {
+            "title": "17th Century",
+            "paragraphs": [
+                "We find the first documentary reference to the Drac de Vilafranca in the Corpus procession of 1600:",
+                "> «Lo clavari fa sonar los músichs, y en aquex temps pàssan los gegants, lo drach y diablots, tirant cuets per regosigar la festa, etcètera.»",
+                "> «En lo endamà, die de Corpus, [...] Lo orde que la vila y la reverent Comunitat sere en la precedèntia dels monastirs y confraries, és que en lo principi de dita professó, per orde del clavari, a sinquanta passes, fa anar lo drach ab los diablots tirant cuets y un músich.»",
+                "The next documented appearance occurred on 7 June 1601, during the celebration of the canonisation of Sant Ramón de Penyafort. A procession was organised that went from Vilafranca to the castle of Sant Domingo, in Santa Margarida i els Monjos, and back. Some verses by the apothecary Salvador Comelles explain it to us:",
+                "> «Y que procuràs ab cuets, axí per lo drach, diablots, y altres voladors que fes; estigués a punt àliga, y los dos jagants y drach per a set del corrent.»",
+                "> «Primerament feren posar a cent pasas devant dita professó lo drach y diablots ab un músich sonant, y tirant, dit drach y diablots, cuets molts de ordinari, etcètera.»",
+                "> «E ab lo sobredit orde a la confraria de Sanct Miquel, ab la bandera y estendart de domàs carmesí y la bandera de camp, ab quoranta confrares ab ses atxes balnques..................40 atxes.»",
+                "> «Cosa primera / vi que venia / de companyia / b avalots / sinch diablots, / un bell dracàs : / de boca y nas / llançava foch. / Ballant un poc / Tots sis plegats, / Ben enramats / tots de cuets / grossos, ben fets / posant-y foch / perquè fes lloch / totom arreu.»"
+            ]
+        },
+        "s18": {
+            "title": "18th Century",
+            "paragraphs": [
+                "At the beginning of the 18th century, the War of Succession dealt a severe blow to festive life in Vilafranca. Despite this, the Drac continued its activity, and we have news of it in 1724 during the celebrations of the proclamation of Louis I as King of Spain.",
+                "A very important documentary source from this century is the Book of the Administration of Sant Fèlix, preserved from 1778 to 1876, which records the expenses of the Festa Major and the Dragon's performances. We thus know that in 1753 the cost of the Drac at the festival was 6 pounds and 14 shillings.",
+                "In 1760, the Drac participated in the procession for the return of the Blessed Sacrament to the church of Santa Maria, in an act of great solemnity for the town. A few years later, in 1771, the Baron of Maldà left written impressions of the Festa Major of Vilafranca, mentioning the festive figures, including the Drac.",
+                "In 1787, the first documented repair of the Drac was carried out, indicating the good use it was seeing and the desire to preserve it. Shortly after, around 1789, the Enlightenment official Francisco de Zamora included the Drac de Vilafranca in his questionnaire about the situation of Catalan towns, recognising it as a relevant element of the territory's festive culture."
+            ]
+        },
+        "s19": {
+            "title": "19th Century",
+            "paragraphs": [
+                "The 19th century was a period of notable activity for the Drac de Vilafranca. In 1802, on the occasion of King Carlos IV's visit to the town, the Drac participated in the welcome events, consolidating its role as a representative symbol of Vilafranca.",
+                "In 1816, a new repair was recorded, necessary to keep the figure in good condition. Another relevant transformation came in 1849, when the flabiol and tamborí were replaced by the gralla as musical accompaniment, giving the Drac a more powerful and festive sound that would characterise it for many decades.",
+                "During the 1870s, the first known photograph of the Drac was taken, a visual testimony of inestimable value for understanding the appearance of the figure in that era. The Festa Major of 1876, which celebrated the centenary of the dedication to Sant Fèlix, was a moment of great splendour, in which the Drac received a payment of 12 duros for its performance.",
+                "The Drac de Vilafranca had its first presence in Barcelona at the Mercè festivities, expanding its reach beyond local festivals. The writer Gaietà Vidal left a 'Descriptive Account of the Festa Major' where he described in detail the presence and dance of the Drac.",
+                "1893 was an important year: a document between the Confraternity and the Baltà family established that the custody of the Drac remained at the Palau Baltà, where it would be preserved. That same year a new repair was carried out, and the documented weight of the figure was 107 kg. The Drac also made a special appearance at Sant Martí Sarroca, showing its presence at events outside Vilafranca."
+            ]
+        },
+        "s20": {
+            "title": "20th Century",
+            "paragraphs": [
+                "In 1912, the first known filming of the Drac de Vilafranca was made, by Mr. Bolet, a cinematographic document of incalculable historical value. Years later, in 1929, the Drac participated in the Barcelona Universal Exhibition, representing Vilafranca at one of the most important international events of the era, with carriers such as Martí Colomer, l'Antonio, el Negre and el Viseres.",
+                "The Civil War and the post-war period meant an interruption and a difficult resumption for the Festa Major. In 1939, celebrations resumed with a very small colla of 5 members, dressed in shirts, sashes and rope-soled shoes, accompanied by flabiol and tamborí.",
+                "The most profound transformation of the century came in December 1979, with the founding of the 'Els Amics del Drac' association, a collective of carriers who took on the management and preservation of the Drac without economic compensation, in the spirit of the new festive culture that was emerging with democracy. That same year, on 23 September, the Drac de Vilafranca participated in the Mostra de Bèsties Fantàstiques at Barcelona's Mercè festivities, an event that was the seed of the Correfoc celebrated since 1981.",
+                "In 1981, the offering of the dances inside the church of Santa Maria during the Mass on 30 August was established. In 1982, els 'Amics del Drac' organised the exhibition 'El Drac' in the chapel of Sant Joan. In 1984 they co-organised the show 'Bestiari fantàstic i popular de Catalunya' in the same chapel. In 1996, the Agrupació del Bestiari Festiu i Popular de Catalunya was established, of which els 'Amics del Drac' are founding members. That same year, the maker Dolors Sans built the Drac Petit in fibreglass, weighing 25 kg."
+            ]
+        },
+        "s21": {
+            "title": "21st Century",
+            "paragraphs": [
+                "The beginning of the 21st century brought new milestones for the Drac de Vilafranca. In 2000, La Maison des Géants of the city of Ath (Belgium) commissioned a copy of the Drac de Vilafranca, recognising its importance as a figure in European festive tradition.",
+                "In 2006, the artist Jordi Grau from Terrassa built a replica of the Drac financed by the surplus from the 2005 Festa Major. The replica was presented on 27 August at the Palau Baltà and that day a joint dance was performed by both dragons, the original and the copy, before a large audience. Since that year, the original Drac only comes out on 30 August (Sant Fèlix), while the replica performs on 29 and 31 August, allowing the Drac to be present on all the central days of the Festa Major.",
+                "The year 2024 has been especially important for Vilafranca's festive heritage: the Drac de Vilafranca has been declared a Cultural Asset of National Interest (BCIN), the highest institutional recognition that Catalonia grants to its cultural heritage, consolidating the projection and protection of a figure that has been part of the identity of Vilafranca del Penedès for centuries."
+            ]
+        }
+    },
+    "events": {
+        "title": "Events",
+        "upcoming_title": "Upcoming events",
+        "past_title": "Past events",
+        "no_upcoming": "No upcoming events scheduled.",
+        "no_past": "No past events.",
+        "loading": "Loading events...",
+        "error": "Error loading events. Please try again.",
+        "see_all": "See all events"
+    },
+    "contact": {
+        "title": "Contact",
+        "intro": "To contact els Amics del Drac de Vilafranca del Penedès, you can use this email address:",
+        "thanks": "Thank you for your interest.",
+        "address_label": "Address",
+        "phone_label": "Phone",
+        "email_label": "Email",
+        "social_label": "Social media",
+        "address": "Carrer Escorxador, 19-21",
+        "city": "08720 Vilafranca del Penedès",
+        "phone": "678 782 622",
+        "email": "drac@dracdevilafranca.com"
+    },
+    "footer": {
+        "entity": "Amics del Drac de Vilafranca",
+        "rights": "All rights reserved",
+        "address": "Carrer Escorxador, 19-21",
+        "city": "08720 Vilafranca del Penedès",
+        "follow_us": "Follow us",
+        "links_title": "Navigation",
+        "contact_title": "Contact",
+        "privacy": "Privacy policy"
+    },
+    "privacy": {
+        "title": "Privacy policy",
+        "subtitle": "How we handle your personal data"
+    },
+    "gallery": {
+        "title": "Photo album",
+        "select_year": "Select a year",
+        "photo_of_year": "Photo of the year",
+        "loading": "Loading photos...",
+        "error": "Error loading gallery photos.",
+        "empty": "No photos available.",
+        "photo_alt": "Colla photo of the year",
+        "prev": "Previous year",
+        "next": "Next year"
+    },
+    "shop": {
+        "title": "Shop",
+        "subtitle": "All official products from els Amics del Drac de Vilafranca del Penedès.",
+        "pickup_notice": "Collection only · We do not ship. We will contact you when your items are ready for collection in Vilafranca del Penedès.",
+        "reserve_btn": "Reserve",
+        "load_error": "Error loading products. Please reload the page.",
+        "kids_sizes": ["1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10 years","11 years","12 years","13 years","14 years"],
+        "modal": {
+            "title": "Make a reservation",
+            "size_label": "Size",
+            "size_placeholder": "Select a size",
+            "color_label": "Colour",
+            "color_placeholder": "Select a colour",
+            "quantity_label": "Quantity",
+            "name_label": "Full name",
+            "email_label": "Email address",
+            "message_label": "Message (optional)",
+            "message_placeholder": "Any additional comments...",
+            "submit": "Confirm reservation",
+            "cancel": "Cancel",
+            "sending": "Sending...",
+            "success": "Reservation sent successfully. You will receive a confirmation email shortly.",
+            "error": "There was an error sending your reservation. Please try again.",
+            "privacy_consent": "I have read and accept the",
+            "privacy_link": "privacy policy",
+            "privacy_required": "You must accept the privacy policy to continue."
+        },
+        "cart": {
+            "title": "Cart",
+            "open": "Open cart",
+            "empty": "Your cart is empty.",
+            "add_btn": "Add to cart",
+            "added": "Added!",
+            "remove": "Remove",
+            "reserve_btn": "Make reservation",
+            "back": "Back",
+            "confirm_title": "Complete reservation",
+            "modal_title": "Add to cart",
+            "add_confirm": "Add",
+            "items_singular": "item",
+            "items_plural": "items",
+            "reserve_count_singular": "Reserve {n} item",
+            "reserve_count_plural": "Reserve {n} items"
+        }
+    },
+    "common": {
+        "back_home": "Back to home",
+        "read_more": "Read more",
+        "loading": "Loading...",
+        "see_all": "See all",
+        "lang_ca": "Catalan",
+        "lang_es": "Spanish",
+        "lang_en": "English"
+    }
+}

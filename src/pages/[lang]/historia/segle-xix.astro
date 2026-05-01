@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import Timeline from '../../../components/Timeline.astro'
+import PageHeader from '../../../components/PageHeader.astro'
+import { getStaticLangPaths, t } from '../../../i18n'
+import type { Lang } from '../../../i18n'
+
+export function getStaticPaths() {
+    return getStaticLangPaths()
+}
+
+const { lang } = Astro.params as { lang: Lang }
+const paragraphs = t(lang, 'history.s19.paragraphs') as string[]
+---
+
+<BaseLayout lang={lang} title={t(lang, 'history.s19.title')}>
+    <main id="main-content" class="pt-24 min-h-screen">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+            <PageHeader
+                supertitle={t(lang, 'history.title') as string}
+                title={t(lang, 'history.s19.title') as string}
+            />
+
+            <Timeline lang={lang} current="segle-xix" />
+
+            <div class="space-y-6">
+                {paragraphs.map((p) => (
+                    <p class="text-text-muted leading-relaxed">{p}</p>
+                ))}
+            </div>
+
+            <div class="mt-14">
+                <Timeline lang={lang} current="segle-xix" compact />
+            </div>
+
+        </div>
+    </main>
+</BaseLayout>

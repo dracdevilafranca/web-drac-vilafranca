@@ -1,0 +1,86 @@
+{
+    "events": [
+        {
+            "id": "trobada-bestiari-2026",
+            "date": "2026-04-25",
+            "time": "18:00",
+            "title": {
+                "ca": "Trobada de Bestiari Festiu i Popular",
+                "es": "Encuentro de Bestiari Festiu i Popular",
+                "en": "Festive and Popular Bestiary Gathering"
+            },
+            "description": {
+                "ca": "Trobada anual de les colles de bestiari festiu i popular de Catalunya. El Drac de Vilafranca hi participarà juntament amb d'altres figures emblemàtiques.",
+                "es": "Encuentro anual de los grupos de bestiario festivo y popular de Cataluña. El Drac de Vilafranca participará junto a otras figuras emblemáticas.",
+                "en": "Annual gathering of Catalan festive and popular bestiary groups. The Drac de Vilafranca will participate alongside other emblematic figures."
+            },
+            "location": {
+                "ca": "Vilafranca del Penedès",
+                "es": "Vilafranca del Penedès",
+                "en": "Vilafranca del Penedès"
+            }
+        },
+        {
+            "id": "festa-major-2026",
+            "date": "2026-08-29",
+            "endDate": "2026-08-31",
+            "time": "20:00",
+            "title": {
+                "ca": "Festa Major de Vilafranca 2026",
+                "es": "Festa Major de Vilafranca 2026",
+                "en": "Festa Major de Vilafranca 2026"
+            },
+            "description": {
+                "ca": "El Drac surt a ballar durant els dies centrals de la Festa Major. L'original el dia 30 (Sant Fèlix) i la rèplica els dies 29 i 31. Foc, música i tradició al cor de Vilafranca.",
+                "es": "El Drac baila durante los días centrales de la Festa Major. El original el día 30 (Sant Fèlix) y la réplica los días 29 y 31. Fuego, música y tradición en el corazón de Vilafranca.",
+                "en": "The Dragon dances during the central days of the Festa Major. The original on the 30th (Sant Fèlix) and the replica on the 29th and 31st. Fire, music and tradition at the heart of Vilafranca."
+            },
+            "location": {
+                "ca": "Plaça de la Vila, Vilafranca del Penedès",
+                "es": "Plaça de la Vila, Vilafranca del Penedès",
+                "en": "Plaça de la Vila, Vilafranca del Penedès"
+            }
+        },
+        {
+            "id": "gaudeamus-2026",
+            "date": "2026-12-05",
+            "time": "20:30",
+            "title": {
+                "ca": "Gaudeamus 2026",
+                "es": "Gaudeamus 2026",
+                "en": "Gaudeamus 2026"
+            },
+            "description": {
+                "ca": "Trobada anual dels Amics del Drac. Sopar de germanor on es convida a tots els qui han format part de la colla, amb lectura del pregó i lliurament d'obsequis.",
+                "es": "Encuentro anual de los Amics del Drac. Cena de hermandad a la que se invita a todos los que han formado parte de la colla, con lectura del pregón y entrega de obsequios.",
+                "en": "Annual gathering of the Amics del Drac. A fellowship dinner for all who have been part of the colla, with the reading of the pregó and gift giving."
+            },
+            "location": {
+                "ca": "Vilafranca del Penedès",
+                "es": "Vilafranca del Penedès",
+                "en": "Vilafranca del Penedès"
+            }
+        },
+        {
+            "id": "festa-major-2025",
+            "date": "2025-08-29",
+            "endDate": "2025-08-31",
+            "time": "20:00",
+            "title": {
+                "ca": "Festa Major de Vilafranca 2025",
+                "es": "Festa Major de Vilafranca 2025",
+                "en": "Festa Major de Vilafranca 2025"
+            },
+            "description": {
+                "ca": "El Drac va sortir a ballar durant els dies centrals de la Festa Major 2025. Una edició memorable amb gran participació de públic.",
+                "es": "El Drac bailó durante los días centrales de la Festa Major 2025. Una edición memorable con gran participación de público.",
+                "en": "The Dragon danced during the central days of the 2025 Festa Major. A memorable edition with great public participation."
+            },
+            "location": {
+                "ca": "Plaça de la Vila, Vilafranca del Penedès",
+                "es": "Plaça de la Vila, Vilafranca del Penedès",
+                "en": "Plaça de la Vila, Vilafranca del Penedès"
+            }
+        }
+    ]
+}

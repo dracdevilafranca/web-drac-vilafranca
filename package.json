@@ -1,0 +1,33 @@
+{
+    "name": "drac-vilafranca-web",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "pages:dev": "wrangler pages dev dist --port 4322",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage",
+        "lint": "eslint ."
+    },
+    "dependencies": {
+        "@astrojs/check": "^0.9.8",
+        "@astrojs/sitemap": "^3.7.2",
+        "@tailwindcss/vite": "^4.0.0",
+        "astro": "^5.0.0",
+        "tailwindcss": "^4.0.0",
+        "typescript": "^5.9.3"
+    },
+    "devDependencies": {
+        "@types/node": "^25.5.0",
+        "@vitest/coverage-v8": "^4.1.2",
+        "eslint": "^10.1.0",
+        "eslint-plugin-astro": "^1.6.0",
+        "jsdom": "^29.0.1",
+        "typescript-eslint": "^8.58.0",
+        "vitest": "^4.1.2",
+        "wrangler": "^3.0.0"
+    }
+}

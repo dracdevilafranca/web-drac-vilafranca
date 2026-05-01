@@ -1,0 +1,752 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getStaticLangPaths, t } from '../../i18n'
+import type { Lang } from '../../i18n'
+
+export function getStaticPaths() {
+    return getStaticLangPaths()
+}
+
+const { lang } = Astro.params as { lang: Lang }
+
+const modal = {
+    title:               t(lang, 'shop.modal.title')               as string,
+    size_label:          t(lang, 'shop.modal.size_label')          as string,
+    size_placeholder:    t(lang, 'shop.modal.size_placeholder')    as string,
+    color_label:         t(lang, 'shop.modal.color_label')         as string,
+    color_placeholder:   t(lang, 'shop.modal.color_placeholder')   as string,
+    quantity_label:      t(lang, 'shop.modal.quantity_label')      as string,
+    name_label:          t(lang, 'shop.modal.name_label')          as string,
+    email_label:         t(lang, 'shop.modal.email_label')         as string,
+    message_label:       t(lang, 'shop.modal.message_label')       as string,
+    message_placeholder: t(lang, 'shop.modal.message_placeholder') as string,
+    submit:              t(lang, 'shop.modal.submit')              as string,
+    cancel:              t(lang, 'shop.modal.cancel')              as string,
+    sending:             t(lang, 'shop.modal.sending')             as string,
+    success:             t(lang, 'shop.modal.success')             as string,
+    error:               t(lang, 'shop.modal.error')               as string,
+    cart_title:          t(lang, 'shop.cart.modal_title')          as string,
+    add_confirm:         t(lang, 'shop.cart.add_confirm')          as string,
+    added:               t(lang, 'shop.cart.added')                as string,
+    add_btn:             t(lang, 'shop.cart.add_btn')              as string,
+    reserve_btn:         t(lang, 'shop.reserve_btn')               as string,
+    load_error:          t(lang, 'shop.load_error')                as string,
+    loading:             t(lang, 'common.loading')                 as string,
+    pickup_notice:       t(lang, 'shop.pickup_notice')             as string,
+    privacy_consent:     t(lang, 'shop.modal.privacy_consent')     as string,
+    privacy_link:        t(lang, 'shop.modal.privacy_link')        as string,
+    privacy_required:    t(lang, 'shop.modal.privacy_required')    as string,
+}
+---
+
+<BaseLayout lang={lang} title={t(lang, 'shop.title')} description={t(lang, 'shop.subtitle')}>
+    <main id="main-content" class="pt-24 min-h-screen">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+            <div class="mb-12">
+                <div class="h-0.5 w-16 bg-linear-to-r from-accent to-gold mb-6"></div>
+                <h1 class="text-4xl md:text-5xl font-display font-bold text-text mb-4">
+                    {t(lang, 'shop.title')}
+                </h1>
+                <p class="text-text-muted leading-relaxed max-w-xl">
+                    {t(lang, 'shop.subtitle')}
+                </p>
+                <div class="mt-4 flex items-start gap-2.5 max-w-xl text-sm text-text-muted bg-bg-elevated border border-border rounded-lg px-4 py-3">
+                    <svg class="w-4 h-4 shrink-0 mt-0.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{modal.pickup_notice}</span>
+                </div>
+            </div>
+
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <p id="products-status" class="col-span-full text-center text-text-muted text-sm py-12">
+                    {t(lang, 'common.loading')}
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <div
+        id="reservation-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg/80 backdrop-blur-sm"
+        style="display:none"
+        aria-modal="true"
+        role="dialog"
+        aria-labelledby="modal-heading"
+    >
+        <div id="modal-backdrop" class="absolute inset-0"></div>
+
+        <div class="relative w-full max-w-md bg-bg-elevated border border-border rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto">
+
+            <div class="flex items-center justify-between px-6 py-4 border-b border-border">
+                <h2 id="modal-heading" class="font-display font-semibold text-text">
+                    {modal.title}
+                </h2>
+                <button
+                    id="modal-close"
+                    class="text-text-muted hover:text-text transition-colors duration-200 p-1 rounded"
+                    aria-label={modal.cancel}
+                >
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <form id="modal-form" class="px-6 py-5 space-y-4" novalidate>
+                <div class="flex items-center gap-3 px-3 py-2 bg-bg rounded-md border border-border">
+                    <img
+                        id="modal-product-image"
+                        src=""
+                        alt=""
+                        class="w-14 h-14 rounded-md object-cover shrink-0 bg-bg-card"
+                        onerror="this.style.display='none'"
+                    />
+                    <div>
+                        <p class="text-xs text-text-subtle mb-0.5">{t(lang, 'shop.reserve_btn')}</p>
+                        <p id="modal-product-display" class="text-sm font-semibold text-text"></p>
+                    </div>
+                </div>
+
+                <div id="modal-size-group">
+                    <label for="modal-size" class="block text-sm font-medium text-text-muted mb-1.5">
+                        {modal.size_label} <span class="text-accent">*</span>
+                    </label>
+                    <select
+                        id="modal-size"
+                        class="w-full bg-bg-card border border-border rounded-md px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent appearance-none cursor-pointer"
+                        required
+                    >
+                        <option value="">{modal.size_placeholder}</option>
+                    </select>
+                </div>
+
+                <div id="modal-color-group">
+                    <label class="block text-sm font-medium text-text-muted mb-1.5">
+                        {modal.color_label} <span class="text-accent">*</span>
+                    </label>
+                    <div id="modal-colors" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <div>
+                    <label for="modal-qty" class="block text-sm font-medium text-text-muted mb-1.5">
+                        {modal.quantity_label} <span class="text-accent">*</span>
+                    </label>
+                    <input
+                        type="number"
+                        id="modal-qty"
+                        min="1"
+                        max="99"
+                        value="1"
+                        class="w-full bg-bg-card border border-border rounded-md px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label for="modal-name" class="block text-sm font-medium text-text-muted mb-1.5">
+                        {modal.name_label} <span class="text-accent">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="modal-name"
+                        class="w-full bg-bg-card border border-border rounded-md px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
+                        required
+                        autocomplete="name"
+                    />
+                </div>
+
+                <div>
+                    <label for="modal-email" class="block text-sm font-medium text-text-muted mb-1.5">
+                        {modal.email_label} <span class="text-accent">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="modal-email"
+                        class="w-full bg-bg-card border border-border rounded-md px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
+                        required
+                        autocomplete="email"
+                    />
+                </div>
+
+                <div>
+                    <label for="modal-message" class="block text-sm font-medium text-text-muted mb-1.5">
+                        {modal.message_label}
+                    </label>
+                    <textarea
+                        id="modal-message"
+                        rows="3"
+                        placeholder={modal.message_placeholder}
+                        class="w-full bg-bg-card border border-border rounded-md px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent resize-none"
+                    ></textarea>
+                </div>
+
+                <div id="modal-privacy-group">
+                    <label class="flex items-start gap-2.5 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            id="modal-privacy"
+                            class="mt-0.5 shrink-0 accent-accent cursor-pointer"
+                        />
+                        <span class="text-xs text-text-muted leading-relaxed">
+                            {modal.privacy_consent}
+                            <a
+                                href={`/${lang}/privacitat`}
+                                target="_blank"
+                                class="underline hover:text-text transition-colors duration-150"
+                            >{modal.privacy_link}</a>.
+                        </span>
+                    </label>
+                </div>
+
+                <p id="modal-error" class="text-sm text-accent hidden"></p>
+
+                <div class="flex gap-3 pt-1">
+                    <button
+                        type="button"
+                        id="modal-cancel"
+                        class="flex-1 py-2.5 border border-border text-text-muted hover:text-text hover:border-border-light rounded-lg text-sm font-medium transition-colors duration-200 cursor-pointer"
+                    >
+                        {modal.cancel}
+                    </button>
+                    <button
+                        type="submit"
+                        id="modal-submit"
+                        class="flex-1 py-2.5 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover text-sm transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                        {modal.submit}
+                    </button>
+                </div>
+            </form>
+
+            <div id="modal-success" class="hidden px-6 py-8 text-center">
+                <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <p class="text-text leading-relaxed">{modal.success}</p>
+                <button
+                    id="modal-success-close"
+                    class="mt-6 px-6 py-2.5 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover text-sm transition-colors duration-200 cursor-pointer"
+                >
+                    {modal.cancel}
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="shop-i18n" class="hidden" data-i18n={JSON.stringify({ ...modal })}></div>
+</BaseLayout>
+
+<!-- is:global required: cards are injected by JS and never receive Astro's scoped class hash -->
+<style is:global>
+    .card-color-swatch[data-active] {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
+    .aspect-square.img-missing {
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 8px,
+            rgba(255,255,255,0.03) 8px,
+            rgba(255,255,255,0.03) 16px
+        );
+    }
+
+    .card-img-wrapper { position: relative; }
+
+    .card-img-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1.75rem;
+        height: 1.75rem;
+        background: rgba(0, 0, 0, 0.45);
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 150ms, background 150ms;
+        z-index: 1;
+    }
+    .card-img-arrow:hover { background: rgba(0, 0, 0, 0.72); }
+    .card-img-wrapper:hover .card-img-arrow { opacity: 1; }
+    /* Touch devices: always show arrows */
+    @media (hover: none) { .card-img-arrow { opacity: 0.7; } }
+    .card-img-prev { left: 0.375rem; }
+    .card-img-next { right: 0.375rem; }
+
+    .card-dots {
+        position: absolute;
+        bottom: 0.5rem;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 0.25rem;
+        pointer-events: none;
+    }
+    .card-dot {
+        display: inline-block;
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.38);
+        transition: background 150ms;
+    }
+    .card-dot[data-active] { background: white; }
+</style>
+
+<script>
+    import { addToCart } from '../../scripts/cart'
+
+    interface ProductColor { name: string; hex: string; image?: string; images?: string[] }
+    interface Product {
+        id: string
+        image: string
+        sizes: string[]
+        colors: ProductColor[]
+        name: Record<string, string>
+        desc: Record<string, string>
+    }
+
+    function escHtml(s: string): string {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+    }
+
+    // Returns ordered image list for a color: uses images[] array, falls back to single image, then product fallback.
+    function getColorImages(c: ProductColor, fallback: string): string[] {
+        if (c.images && c.images.length > 0) return c.images
+        if (c.image) return [c.image]
+        return fallback ? [fallback] : []
+    }
+
+    function updateCardDisplay(productId: string, colorIdx: number, imgIdx: number, colors: ProductColor[], fallback: string): void {
+        const article = [...document.querySelectorAll<HTMLElement>('article[data-product-id]')]
+            .find(a => a.dataset.productId === productId)
+        if (!article) return
+        const color = colors[colorIdx]
+        if (!color) return
+        const imgs = getColorImages(color, fallback)
+        const clamped = imgs.length > 0 ? Math.max(0, Math.min(imgIdx, imgs.length - 1)) : 0
+        const imgSrc  = imgs[clamped] ?? fallback
+
+        const cardImg = document.getElementById(`card-img-${productId}`) as HTMLImageElement | null
+        if (cardImg && imgSrc) cardImg.src = imgSrc
+
+        const dotsEl = document.getElementById(`card-dots-${productId}`)
+        if (dotsEl) {
+            dotsEl.innerHTML = imgs.length > 1
+                ? imgs.map((_, i) => `<span class="card-dot"${i === clamped ? ' data-active' : ''}></span>`).join('')
+                : ''
+        }
+
+        const show = imgs.length > 1
+        ;(article.querySelector<HTMLElement>('.card-img-prev') ?? null)?.style.setProperty('display', show ? '' : 'none')
+        ;(article.querySelector<HTMLElement>('.card-img-next') ?? null)?.style.setProperty('display', show ? '' : 'none')
+
+        article.dataset.colorIdx = String(colorIdx)
+        article.dataset.imgIdx   = String(clamped)
+    }
+
+    function productCardHtml(p: Product, i18n: Record<string, string>, lang: string): string {
+        const name = p.name[lang] ?? p.name['ca'] ?? ''
+        const desc = p.desc[lang] ?? p.desc['ca'] ?? ''
+
+        const sizesHtml = p.sizes.length > 0
+            ? `<div class="flex flex-wrap gap-1">${
+                p.sizes.length <= 8
+                    ? p.sizes.map(s => `<span class="px-2 py-0.5 text-xs border border-border text-text-subtle rounded">${escHtml(s)}</span>`).join('')
+                    : `<span class="text-xs text-text-subtle">${escHtml(p.sizes[0])} – ${escHtml(p.sizes[p.sizes.length - 1])}</span>`
+              }</div>`
+            : ''
+
+        const firstColor     = p.colors[0]
+        const firstColorImgs = firstColor ? getColorImages(firstColor, p.image) : (p.image ? [p.image] : [])
+        const initialImage   = firstColorImgs[0] ?? p.image
+        const multipleImages = firstColorImgs.length > 1
+
+        const dotsHtml = multipleImages
+            ? firstColorImgs.map((_, i) => `<span class="card-dot"${i === 0 ? ' data-active' : ''}></span>`).join('')
+            : ''
+
+        const arrowDisplay = multipleImages ? '' : 'display:none'
+
+        const colorsHtml = p.colors.length > 0
+            ? `<div class="flex gap-1.5 flex-wrap">${
+                p.colors.map((c, i) => `<button type="button"
+                    class="card-color-swatch w-4 h-4 rounded-full border border-white/20 shrink-0 cursor-pointer hover:scale-110 transition-transform duration-150"
+                    style="background-color:${escHtml(c.hex)}" title="${escHtml(c.name)}"
+                    data-color-idx="${i}"${i === 0 ? ' data-active' : ''}></button>`).join('')
+              }</div>`
+            : ''
+
+        const sizesData  = escHtml(JSON.stringify(p.sizes))
+        const colorsData = escHtml(JSON.stringify(p.colors))
+
+        return `<article class="bg-bg-card border border-border rounded-xl overflow-hidden flex flex-col hover:border-border-light transition-colors duration-200"
+            data-product-id="${escHtml(p.id)}" data-color-idx="0" data-img-idx="0"
+            data-colors="${colorsData}" data-fallback-image="${escHtml(p.image)}">
+            <div class="aspect-square bg-bg overflow-hidden card-img-wrapper">
+                <img id="card-img-${escHtml(p.id)}" src="${escHtml(initialImage)}" alt="${escHtml(name)}"
+                    class="w-full h-full object-cover" loading="lazy"
+                    onerror="this.closest('.aspect-square').classList.add('img-missing');this.remove()" />
+                <button type="button" class="card-img-prev card-img-arrow" style="${arrowDisplay}" aria-label="Previous">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="10,3 5,8 10,13"/></svg>
+                </button>
+                <button type="button" class="card-img-next card-img-arrow" style="${arrowDisplay}" aria-label="Next">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,3 11,8 6,13"/></svg>
+                </button>
+                <div id="card-dots-${escHtml(p.id)}" class="card-dots">${dotsHtml}</div>
+            </div>
+            <div class="flex flex-col flex-1 p-5 gap-3">
+                <h2 class="font-display font-semibold text-text text-lg leading-tight">${escHtml(name)}</h2>
+                <p class="text-text-muted text-sm leading-relaxed flex-1">${escHtml(desc)}</p>
+                ${sizesHtml}
+                ${colorsHtml}
+                <div class="flex gap-2 mt-1">
+                    <button class="cart-btn flex-1 py-2 border border-border text-text-muted hover:border-accent hover:text-accent rounded-lg text-sm transition-all duration-200 cursor-pointer"
+                        data-product-id="${escHtml(p.id)}" data-product-name="${escHtml(name)}"
+                        data-sizes="${sizesData}" data-colors="${colorsData}"
+                    >${escHtml(i18n.add_btn ?? '')}</button>
+                    <button class="reserve-btn flex-1 py-2.5 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover active:scale-[0.98] transition-all duration-200 text-sm cursor-pointer"
+                        data-product-id="${escHtml(p.id)}" data-product-name="${escHtml(name)}"
+                        data-sizes="${sizesData}" data-colors="${colorsData}"
+                    >${escHtml(i18n.reserve_btn ?? '')}</button>
+                </div>
+            </div>
+        </article>`
+    }
+
+    async function loadProducts() {
+        const grid   = document.getElementById('products-grid')
+        const status = document.getElementById('products-status')
+        if (!grid) return
+        const i18nEl = document.getElementById('shop-i18n')
+        const i18n   = JSON.parse(i18nEl?.dataset.i18n ?? '{}') as Record<string, string>
+        const lang   = document.documentElement.lang || 'ca'
+        try {
+            const r = await fetch('/data/products.json')
+            if (!r.ok) throw new Error('fetch failed')
+            const products = await r.json() as Product[]
+            status?.remove()
+            grid.insertAdjacentHTML('beforeend', products.map(p => productCardHtml(p, i18n, lang)).join(''))
+        } catch {
+            if (status) status.textContent = i18n.load_error ?? 'Error'
+        }
+    }
+
+    function initShop() {
+        const rawModal = document.getElementById('reservation-modal')
+        const rawForm  = document.getElementById('modal-form')
+        const i18nEl   = document.getElementById('shop-i18n')
+        if (!(rawModal instanceof HTMLElement) || !(rawForm instanceof HTMLFormElement) || !i18nEl) return
+        const modalEl: HTMLElement  = rawModal
+        const form: HTMLFormElement = rawForm
+
+        const i18n = JSON.parse(i18nEl.dataset.i18n ?? '{}') as Record<string, string>
+
+        const headingEl       = document.getElementById('modal-heading')
+        const productDisplay  = document.getElementById('modal-product-display')
+        const sizeGroup       = document.getElementById('modal-size-group')
+        const colorGroup      = document.getElementById('modal-color-group')
+        const colorsContainer = document.getElementById('modal-colors')
+        const sizeSelect      = document.getElementById('modal-size') as HTMLSelectElement | null
+        const qtyInput        = document.getElementById('modal-qty') as HTMLInputElement | null
+        const nameInput       = document.getElementById('modal-name') as HTMLInputElement | null
+        const emailInput      = document.getElementById('modal-email') as HTMLInputElement | null
+        const messageInput    = document.getElementById('modal-message') as HTMLTextAreaElement | null
+        const submitBtn       = document.getElementById('modal-submit') as HTMLButtonElement | null
+        const cancelBtns      = document.querySelectorAll('#modal-close, #modal-cancel')
+        const errorEl         = document.getElementById('modal-error')
+        const successEl       = document.getElementById('modal-success')
+
+        let currentProduct: { id: string; name: string; sizes: string[]; colors: ProductColor[]; image: string } | null = null
+        let currentMode: 'reserve' | 'cart' = 'reserve'
+        let selectedColor = ''
+
+        function renderColors(colors: ProductColor[]) {
+            if (!colorsContainer) return
+            colorsContainer.innerHTML = ''
+            selectedColor = ''
+            colors.forEach((c) => {
+                const btn = document.createElement('button')
+                btn.type = 'button'
+                btn.dataset.color = c.name
+                btn.title = c.name
+                btn.className = 'flex items-center gap-2 px-3 py-1.5 rounded-md border border-border text-sm text-text-muted transition-all duration-150 cursor-pointer hover:border-accent hover:text-accent'
+                btn.innerHTML = `<span class="w-3.5 h-3.5 rounded-full shrink-0 border border-white/20" style="background-color:${escHtml(c.hex)}"></span>${escHtml(c.name)}`
+                btn.addEventListener('click', () => {
+                    selectedColor = c.name
+                    colorsContainer.querySelectorAll<HTMLElement>('[data-color]').forEach((b) => {
+                        const active = b.dataset.color === c.name
+                        b.classList.toggle('border-accent', active)
+                        b.classList.toggle('text-accent', active)
+                        b.classList.toggle('border-border', !active)
+                        b.classList.toggle('text-text-muted', !active)
+                    })
+                    // Keep modal preview image in sync with the selected color
+                    const modalImgEl = document.getElementById('modal-product-image') as HTMLImageElement | null
+                    const img = c.images?.[0] ?? c.image ?? currentProduct?.image ?? ''
+                    if (modalImgEl) {
+                        modalImgEl.src = img
+                        if (img) { modalImgEl.style.removeProperty('display') } else { modalImgEl.style.display = 'none' }
+                    }
+                    if (currentProduct) currentProduct.image = img
+                })
+                colorsContainer.appendChild(btn)
+            })
+            if (colors.length === 1) {
+                colorsContainer.querySelector<HTMLButtonElement>('[data-color]')?.click()
+            }
+        }
+
+        function openModal(productId: string, productName: string, sizes: string[], colors: ProductColor[], mode: 'reserve' | 'cart', defaultImage: string = '') {
+            currentProduct = { id: productId, name: productName, sizes, colors, image: defaultImage }
+            currentMode = mode
+
+            if (headingEl) headingEl.textContent = mode === 'cart' ? i18n.cart_title : i18n.title
+            if (submitBtn) submitBtn.textContent  = mode === 'cart' ? i18n.add_confirm : i18n.submit
+            if (productDisplay) productDisplay.textContent = productName
+
+            const modalImgEl = document.getElementById('modal-product-image') as HTMLImageElement | null
+            if (modalImgEl) {
+                modalImgEl.src = defaultImage
+                if (defaultImage) {
+                    // Reset display in case a previous onerror hid the element
+                    modalImgEl.style.removeProperty('display')
+                } else {
+                    modalImgEl.style.display = 'none'
+                }
+            }
+
+            if (sizeSelect && sizeGroup) {
+                sizeSelect.innerHTML = `<option value="">${i18n.size_placeholder}</option>`
+                sizes.forEach((s) => {
+                    const opt = document.createElement('option')
+                    opt.value = s; opt.textContent = s
+                    sizeSelect.appendChild(opt)
+                })
+                sizeGroup.style.display = sizes.length > 0 ? '' : 'none'
+                sizeSelect.required = sizes.length > 0
+            }
+
+            if (colorGroup) colorGroup.style.display = colors.length > 0 ? '' : 'none'
+            renderColors(colors)
+
+            // Name, email, message and privacy consent are only required for direct reservations, not cart add
+            const nameGroup    = nameInput?.closest('div') as HTMLElement | null
+            const emailGroup   = emailInput?.closest('div') as HTMLElement | null
+            const msgGroup     = messageInput?.closest('div') as HTMLElement | null
+            const privacyGroup = document.getElementById('modal-privacy-group')
+            const privacyCheck = document.getElementById('modal-privacy') as HTMLInputElement | null
+            if (nameGroup)    nameGroup.style.display    = mode === 'reserve' ? '' : 'none'
+            if (emailGroup)   emailGroup.style.display   = mode === 'reserve' ? '' : 'none'
+            if (msgGroup)     msgGroup.style.display     = mode === 'reserve' ? '' : 'none'
+            if (privacyGroup) privacyGroup.style.display = mode === 'reserve' ? '' : 'none'
+            if (privacyCheck) privacyCheck.checked       = false
+
+            form.reset()
+            if (qtyInput) qtyInput.value = '1'
+            if (errorEl) errorEl.classList.add('hidden')
+            if (successEl) successEl.classList.add('hidden')
+            form.classList.remove('hidden')
+            if (submitBtn) submitBtn.disabled = false
+
+            modalEl.style.display = 'flex'
+            document.body.style.overflow = 'hidden'
+            focusBeforeModal = document.activeElement as HTMLElement | null
+            sizeSelect && sizes.length > 0 ? sizeSelect.focus() : qtyInput?.focus()
+        }
+
+        let focusBeforeModal: HTMLElement | null = null
+
+        function getFocusable(): HTMLElement[] {
+            return Array.from(
+                modalEl.querySelectorAll<HTMLElement>(
+                    'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                )
+            ).filter((el) => !el.closest('[hidden]') && el.offsetParent !== null)
+        }
+
+        function closeModal() {
+            modalEl.style.display = 'none'
+            document.body.style.overflow = ''
+            focusBeforeModal?.focus()
+        }
+
+        // Event delegation handles clicks on dynamically inserted product cards
+        document.getElementById('products-grid')?.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement
+
+            const arrow = target.closest<HTMLElement>('.card-img-prev, .card-img-next')
+            if (arrow) {
+                const art = arrow.closest<HTMLElement>('article[data-product-id]')
+                if (!art) return
+                const pid      = art.dataset.productId ?? ''
+                const colors   = JSON.parse(art.dataset.colors ?? '[]') as ProductColor[]
+                const fallback = art.dataset.fallbackImage ?? ''
+                const ci       = parseInt(art.dataset.colorIdx ?? '0', 10)
+                const ii       = parseInt(art.dataset.imgIdx   ?? '0', 10)
+                const imgs     = getColorImages(colors[ci] ?? { name: '', hex: '' }, fallback)
+                const dir      = arrow.classList.contains('card-img-prev') ? -1 : 1
+                updateCardDisplay(pid, ci, (ii + dir + Math.max(imgs.length, 1)) % Math.max(imgs.length, 1), colors, fallback)
+                return
+            }
+
+            const swatch = target.closest<HTMLElement>('.card-color-swatch')
+            if (swatch) {
+                const art = swatch.closest<HTMLElement>('article[data-product-id]')
+                if (!art) return
+                const pid      = art.dataset.productId ?? ''
+                const colors   = JSON.parse(art.dataset.colors ?? '[]') as ProductColor[]
+                const fallback = art.dataset.fallbackImage ?? ''
+                const ci       = parseInt(swatch.dataset.colorIdx ?? '0', 10)
+                swatch.parentElement?.querySelectorAll<HTMLElement>('.card-color-swatch').forEach(s => delete s.dataset.active)
+                swatch.dataset.active = ''
+                updateCardDisplay(pid, ci, 0, colors, fallback)
+                return
+            }
+
+            const btn = target.closest<HTMLElement>('.reserve-btn, .cart-btn')
+            if (!btn) return
+            const productId    = btn.dataset.productId ?? ''
+            const cardImgEl    = document.getElementById(`card-img-${productId}`) as HTMLImageElement | null
+            const defaultImage = cardImgEl?.src ?? ''
+            openModal(
+                productId,
+                btn.dataset.productName ?? '',
+                JSON.parse(btn.dataset.sizes  ?? '[]') as string[],
+                JSON.parse(btn.dataset.colors ?? '[]') as ProductColor[],
+                btn.classList.contains('cart-btn') ? 'cart' : 'reserve',
+                defaultImage
+            )
+        })
+
+        // Swipe left/right on product cards to cycle images (touch devices)
+        let swipeTouchX = 0
+        const grid = document.getElementById('products-grid')
+        grid?.addEventListener('touchstart', (e) => {
+            swipeTouchX = e.touches[0]?.clientX ?? 0
+        }, { passive: true })
+        grid?.addEventListener('touchend', (e) => {
+            const dx = (e.changedTouches[0]?.clientX ?? 0) - swipeTouchX
+            if (Math.abs(dx) < 40) return
+            const art = (e.target as HTMLElement).closest<HTMLElement>('article[data-product-id]')
+            if (!art) return
+            const pid      = art.dataset.productId ?? ''
+            const colors   = JSON.parse(art.dataset.colors ?? '[]') as ProductColor[]
+            const fallback = art.dataset.fallbackImage ?? ''
+            const ci       = parseInt(art.dataset.colorIdx ?? '0', 10)
+            const ii       = parseInt(art.dataset.imgIdx   ?? '0', 10)
+            const imgs     = getColorImages(colors[ci] ?? { name: '', hex: '' }, fallback)
+            const dir      = dx < 0 ? 1 : -1
+            updateCardDisplay(pid, ci, (ii + dir + Math.max(imgs.length, 1)) % Math.max(imgs.length, 1), colors, fallback)
+        }, { passive: true })
+
+        cancelBtns.forEach((b) => b.addEventListener('click', closeModal))
+        document.getElementById('modal-success-close')?.addEventListener('click', closeModal)
+        document.getElementById('modal-backdrop')?.addEventListener('click', closeModal)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalEl.style.display !== 'none') {
+                closeModal()
+                return
+            }
+            if (e.key === 'Tab' && modalEl.style.display !== 'none') {
+                const focusable = getFocusable()
+                if (!focusable.length) return
+                const first = focusable[0]
+                const last  = focusable[focusable.length - 1]
+                if (e.shiftKey) {
+                    if (document.activeElement === first) { e.preventDefault(); last.focus() }
+                } else {
+                    if (document.activeElement === last)  { e.preventDefault(); first.focus() }
+                }
+            }
+        })
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            if (!currentProduct || !submitBtn) return
+
+            const size     = sizeSelect?.value ?? ''
+            const quantity = parseInt(qtyInput?.value ?? '1', 10)
+
+            if (currentProduct.sizes.length > 0 && !size) { sizeSelect?.focus(); return }
+            if (currentProduct.colors.length > 0 && !selectedColor) {
+                colorsContainer?.querySelector<HTMLElement>('[data-color]')?.focus()
+                return
+            }
+
+            if (currentMode === 'cart') {
+                addToCart({
+                    productId:   currentProduct.id,
+                    productName: currentProduct.name,
+                    size,
+                    color:    selectedColor,
+                    quantity,
+                    image:    currentProduct.image,
+                })
+                closeModal()
+                const cartBtn = document.querySelector<HTMLElement>(`.cart-btn[data-product-id="${currentProduct.id}"]`)
+                if (cartBtn) {
+                    const orig = cartBtn.textContent ?? ''
+                    cartBtn.textContent = i18n.added
+                    setTimeout(() => { cartBtn.textContent = orig }, 1500)
+                }
+                document.dispatchEvent(new Event('open-cart'))
+                return
+            }
+
+            const privacyChecked = (document.getElementById('modal-privacy') as HTMLInputElement | null)?.checked ?? false
+            if (!privacyChecked) {
+                if (errorEl) { errorEl.textContent = i18n.privacy_required; errorEl.classList.remove('hidden') }
+                return
+            }
+
+            const custName = nameInput?.value.trim()    ?? ''
+            const email    = emailInput?.value.trim()   ?? ''
+            const message  = messageInput?.value.trim() ?? ''
+
+            submitBtn.disabled = true
+            submitBtn.textContent = i18n.sending
+
+            try {
+                const res = await fetch('/api/reserva', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        product_name:   currentProduct.name,
+                        size,
+                        color:          selectedColor,
+                        quantity,
+                        customer_name:  custName,
+                        customer_email: email,
+                        message,
+                    }),
+                })
+                const json = await res.json() as { ok: boolean }
+                if (!json.ok) throw new Error('not ok')
+                form.classList.add('hidden')
+                successEl?.classList.remove('hidden')
+            } catch {
+                if (errorEl) { errorEl.textContent = i18n.error; errorEl.classList.remove('hidden') }
+                submitBtn.disabled = false
+                submitBtn.textContent = i18n.submit
+            }
+        })
+    }
+
+    initShop()
+    loadProducts()
+</script>

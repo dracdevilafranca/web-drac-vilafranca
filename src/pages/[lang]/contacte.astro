@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PageHeader from '../../components/PageHeader.astro'
+import SocialLinks from '../../components/SocialLinks.astro'
+import ObfuscatedEmail from '../../components/ObfuscatedEmail.astro'
+import { getStaticLangPaths, t } from '../../i18n'
+import type { Lang } from '../../i18n'
+
+export function getStaticPaths() {
+    return getStaticLangPaths()
+}
+
+const { lang } = Astro.params as { lang: Lang }
+---
+
+<BaseLayout lang={lang} title={t(lang, 'contact.title')}>
+    <main id="main-content" class="pt-24 min-h-screen">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+            <PageHeader
+                title={t(lang, 'contact.title') as string}
+                subtitle={t(lang, 'contact.intro') as string}
+            />
+
+            <div class="bg-bg-card border border-border rounded-lg divide-y divide-border mb-10">
+
+                <div class="flex gap-4 p-6">
+                    <span class="text-gold shrink-0 mt-0.5" aria-hidden="true">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-2">
+                            {t(lang, 'contact.address_label')}
+                        </p>
+                        <address class="not-italic text-text-muted text-sm leading-relaxed space-y-0.5">
+                            <p>{t(lang, 'contact.address')}</p>
+                            <p>{t(lang, 'contact.city')}</p>
+                        </address>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 p-6">
+                    <span class="text-gold shrink-0 mt-0.5" aria-hidden="true">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-2">
+                            {t(lang, 'contact.email_label')}
+                        </p>
+                        <ObfuscatedEmail class="text-text-muted text-sm hover:text-text transition-colors duration-200" />
+                    </div>
+                </div>
+
+            </div>
+
+            <section aria-labelledby="social-title" class="mb-12">
+                <h2
+                    id="social-title"
+                    class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-5"
+                >
+                    {t(lang, 'contact.social_label')}
+                </h2>
+                <SocialLinks showHandle />
+            </section>
+
+            <p class="text-text-subtle text-sm italic">
+                {t(lang, 'contact.thanks')}
+            </p>
+
+        </div>
+    </main>
+</BaseLayout>

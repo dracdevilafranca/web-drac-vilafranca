@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import EventList from '../../components/EventList.astro'
+import { getStaticLangPaths, t } from '../../i18n'
+import type { Lang } from '../../i18n'
+
+export function getStaticPaths() {
+    return getStaticLangPaths()
+}
+
+const { lang } = Astro.params as { lang: Lang }
+---
+
+<BaseLayout lang={lang} title={t(lang, 'events.title')}>
+    <main id="main-content" class="pt-24 min-h-screen">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+            <!-- Header -->
+            <div class="mb-10">
+                <div class="h-0.5 w-16 bg-linear-to-r from-accent to-gold mb-6"></div>
+                <h1 class="text-4xl md:text-5xl font-display font-bold text-text">
+                    {t(lang, 'events.title')}
+                </h1>
+            </div>
+
+            <!-- Upcoming -->
+            <section aria-labelledby="upcoming-title">
+                <h2
+                    id="upcoming-title"
+                    class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-4"
+                >
+                    {t(lang, 'events.upcoming_title')}
+                </h2>
+                <EventList lang={lang} showPast={false} />
+            </section>
+
+            <!-- Past -->
+            <section aria-labelledby="past-title" class="mt-12">
+                <h2
+                    id="past-title"
+                    class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-4"
+                >
+                    {t(lang, 'events.past_title')}
+                </h2>
+                <EventList lang={lang} onlyPast={true} />
+            </section>
+
+        </div>
+    </main>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+interface Props {
+    class?: string
+}
+
+const { class: cls = '' } = Astro.props
+
+// Email encoded at build time — JS assembles at runtime to prevent scraping
+const encoded = Buffer.from('drac@dracdevilafranca.com').toString('base64')
+---
+
+<a
+    data-e={encoded}
+    href="#"
+    class={`obf-email${cls ? ' ' + cls : ''}`}
+    aria-label="drac at dracdevilafranca.com"
+>
+    <noscript>drac [at] dracdevilafranca.com</noscript>
+</a>
+
+<script>
+    document.querySelectorAll<HTMLAnchorElement>('a.obf-email').forEach((a) => {
+        const e = a.dataset.e
+        if (!e) return
+        const email = atob(e)
+        a.href = `mailto:${email}`
+        a.textContent = email
+        a.removeAttribute('aria-label')
+    })
+</script>

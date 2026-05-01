@@ -1,0 +1,4 @@
+# Cloudflare Pages – Redirects
+# Format: [origen]  [destí]  [codi]
+
+/  /ca/  301
