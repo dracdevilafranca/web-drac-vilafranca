@@ -4,12 +4,25 @@ on:
   push:
     branches: [main, develop]
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, 'release/**']
 
 permissions:
   contents: read
 
 jobs:
+  check-branch:
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify source branch is release/* or hotfix/*
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          if [[ "$BRANCH" != release/* && "$BRANCH" != hotfix/* ]]; then
+            echo "PRs to main must come from release/* or hotfix/* branches."
+            echo "Current branch: $BRANCH"
+            exit 1
+          fi
+
   ci:
     runs-on: ubuntu-latest
 
