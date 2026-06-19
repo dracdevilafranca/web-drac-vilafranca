@@ -15,6 +15,8 @@ function sanitize(val: unknown): string {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
 }
 
 function isValidEmail(email: string): boolean {
@@ -158,7 +160,7 @@ export async function onRequestPost({
 </body></html>`
 
     // Send both emails concurrently — association notification and customer confirmation
-    const [assocOk] = await Promise.all([
+    const [assocOk, custOk] = await Promise.all([
         sendEmail(
             env.RESEND_API_KEY,
             fromNoreply,
@@ -176,5 +178,5 @@ export async function onRequestPost({
         ),
     ])
 
-    return jsonResponse(assocOk)
+    return jsonResponse(assocOk && custOk)
 }

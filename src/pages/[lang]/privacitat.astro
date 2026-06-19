@@ -3,123 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHeader from '../../components/PageHeader.astro'
 import { getStaticLangPaths, t } from '../../i18n'
 import type { Lang } from '../../i18n'
+import { privacyContent } from '../../data/privacy'
 
 export function getStaticPaths() {
     return getStaticLangPaths()
 }
 
 const { lang } = Astro.params as { lang: Lang }
-
-const contact = {
-    entity:  'Amics del Drac de Vilafranca del Penedès',
-    address: 'Carrer Escorxador, 19-21, 08720 Vilafranca del Penedès',
-    email:   'drac@dracdevilafranca.com',
-    aepd:    'www.aepd.es',
-}
-
-type Section = { heading: string; body: string }
-type Content = { sections: Section[] }
-
-const content: Record<Lang, Content> = {
-    ca: {
-        sections: [
-            {
-                heading: 'Responsable del tractament',
-                body: `${contact.entity}, amb adreça a ${contact.address} i correu de contacte ${contact.email}.`,
-            },
-            {
-                heading: 'Dades recollides',
-                body: 'Nom i cognoms, correu electrònic i, opcionalment, un missatge. Aquestes dades es faciliten voluntàriament a través del formulari de reserva de la botiga.',
-            },
-            {
-                heading: 'Finalitat',
-                body: 'Gestionar les reserves de productes de la botiga oficial i enviar la confirmació per correu electrònic.',
-            },
-            {
-                heading: 'Legitimació',
-                body: 'El tractament es basa en el consentiment de l\'interessat, d\'acord amb l\'article 6.1.a del Reglament General de Protecció de Dades (RGPD).',
-            },
-            {
-                heading: 'Conservació',
-                body: 'Les dades es conservaran durant un màxim d\'un any a partir de la data de la reserva, o fins que se\'n sol·liciti la supressió.',
-            },
-            {
-                heading: 'Destinataris',
-                body: `No se cediran dades a tercers, excepte per obligació legal. Fem servir Resend (resend.com) com a encarregat del tractament per a l\'enviament de correus de confirmació.`,
-            },
-            {
-                heading: 'Drets',
-                body: `Podeu exercir els drets d\'accés, rectificació, supressió, limitació, portabilitat i oposició dirigint-vos a ${contact.email}. Si considereu que el tractament no és conforme a la normativa vigent, teniu dret a presentar una reclamació davant l\'Agència Espanyola de Protecció de Dades (${contact.aepd}).`,
-            },
-        ],
-    },
-    es: {
-        sections: [
-            {
-                heading: 'Responsable del tratamiento',
-                body: `${contact.entity}, con dirección en ${contact.address} y correo de contacto ${contact.email}.`,
-            },
-            {
-                heading: 'Datos recogidos',
-                body: 'Nombre y apellidos, correo electrónico y, opcionalmente, un mensaje. Estos datos se facilitan voluntariamente a través del formulario de reserva de la tienda.',
-            },
-            {
-                heading: 'Finalidad',
-                body: 'Gestionar las reservas de productos de la tienda oficial y enviar la confirmación por correo electrónico.',
-            },
-            {
-                heading: 'Legitimación',
-                body: 'El tratamiento se basa en el consentimiento del interesado, de acuerdo con el artículo 6.1.a del Reglamento General de Protección de Datos (RGPD).',
-            },
-            {
-                heading: 'Conservación',
-                body: 'Los datos se conservarán durante un máximo de un año desde la fecha de la reserva, o hasta que se solicite su supresión.',
-            },
-            {
-                heading: 'Destinatarios',
-                body: `No se cederán datos a terceros, salvo obligación legal. Utilizamos Resend (resend.com) como encargado del tratamiento para el envío de correos de confirmación.`,
-            },
-            {
-                heading: 'Derechos',
-                body: `Podéis ejercer los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición dirigiéndoos a ${contact.email}. Si consideráis que el tratamiento no es conforme a la normativa vigente, tenéis derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (${contact.aepd}).`,
-            },
-        ],
-    },
-    en: {
-        sections: [
-            {
-                heading: 'Data controller',
-                body: `${contact.entity}, located at ${contact.address}, contact email: ${contact.email}.`,
-            },
-            {
-                heading: 'Data collected',
-                body: 'Full name, email address and, optionally, a message. This data is provided voluntarily through the shop reservation form.',
-            },
-            {
-                heading: 'Purpose',
-                body: 'To process product reservations from the official shop and send a confirmation email.',
-            },
-            {
-                heading: 'Legal basis',
-                body: 'Processing is based on the consent of the data subject, in accordance with Article 6(1)(a) of the General Data Protection Regulation (GDPR).',
-            },
-            {
-                heading: 'Retention',
-                body: 'Data will be kept for a maximum of one year from the reservation date, or until deletion is requested.',
-            },
-            {
-                heading: 'Recipients',
-                body: `Data will not be shared with third parties except as required by law. We use Resend (resend.com) as a data processor for sending confirmation emails.`,
-            },
-            {
-                heading: 'Your rights',
-                body: `You may exercise your rights of access, rectification, erasure, restriction, portability and objection by contacting ${contact.email}. If you believe processing does not comply with applicable law, you have the right to lodge a complaint with the Spanish Data Protection Agency (${contact.aepd}).`,
-            },
-        ],
-    },
-}
-
-const { sections } = content[lang]
+const { sections } = privacyContent[lang]
 ---
 
 <BaseLayout
@@ -139,7 +30,7 @@ const { sections } = content[lang]
                 {sections.map((section) => (
                     <section>
                         <h2 class="text-lg font-semibold text-text mb-2">{section.heading}</h2>
-                        <p class="text-text-muted leading-relaxed text-sm">{section.body}</p>
+                        <p class="text-text leading-relaxed">{section.body}</p>
                     </section>
                 ))}
             </div>

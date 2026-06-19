@@ -18,7 +18,7 @@ const paragraphs = t(lang, 'small_dragon.paragraphs') as string[]
 
             <PageHeader title={t(lang, 'small_dragon.title') as string} />
 
-            <div class="mb-10 overflow-hidden rounded-lg border border-border bg-bg-card">
+            <div class="mb-10 overflow-hidden rounded-sm border border-border bg-bg-card">
                 <img
                     src="/images/drac-petit.jpg"
                     alt={t(lang, 'small_dragon.title') as string}
@@ -31,24 +31,24 @@ const paragraphs = t(lang, 'small_dragon.paragraphs') as string[]
 
             <div class="space-y-6">
                 {paragraphs.slice(0, 2).map((p) => (
-                    <p class="text-text-muted leading-relaxed">{p}</p>
+                    <p class="text-text leading-relaxed">{p}</p>
                 ))}
             </div>
 
-            <div class="my-10 overflow-hidden rounded-lg border border-border bg-bg-card">
+            <div class="my-10 overflow-hidden rounded-sm border border-border bg-bg-card">
                 <img
-                    src="/images/drac-petit.jpg"
+                    src="/images/drac-petit-vertical.jpg"
                     alt={t(lang, 'small_dragon.title') as string}
                     class="w-full h-auto object-cover"
                     loading="lazy"
-                    width="1024"
-                    height="682"
+                    width="871"
+                    height="1126"
                 />
             </div>
 
             <div class="space-y-6">
                 {paragraphs.slice(2).map((p) => (
-                    <p class="text-text-muted leading-relaxed">{p}</p>
+                    <p class="text-text leading-relaxed">{p}</p>
                 ))}
             </div>
 

@@ -28,7 +28,7 @@ const paragraphs = t(lang, 'history.s17.paragraphs') as string[]
                 {paragraphs.map((p) =>
                     p.startsWith('> ')
                         ? <blockquote>{p.slice(2)}</blockquote>
-                        : <p class="text-text-muted leading-relaxed">{p}</p>
+                        : <p class="text-text leading-relaxed">{p}</p>
                 )}
             </div>
 

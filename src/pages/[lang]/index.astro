@@ -3,15 +3,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import EventList from '../../components/EventList.astro'
 import { getStaticLangPaths, t } from '../../i18n'
 import type { Lang } from '../../i18n'
+import { readdirSync } from 'node:fs'
+import { join } from 'node:path'
 
 export function getStaticPaths() {
     return getStaticLangPaths()
 }
 
 const { lang } = Astro.params as { lang: Lang }
+
+const galleryFiles = readdirSync(join(process.cwd(), 'public', 'gallery'))
+    .filter((f) => /^\d{4}\.(jpg|jpeg|png|webp|gif)$/i.test(f))
+    .sort((a, b) => b.localeCompare(a))
+const latestGalleryImage = galleryFiles[0] ? `/gallery/${galleryFiles[0]}` : '/images/drac-panoramic.jpg'
+const latestYear = galleryFiles[0] ? galleryFiles[0].replace(/\.\w+$/, '') : ''
 ---
 
 <BaseLayout lang={lang} title={t(lang, 'site.title')} description={t(lang, 'site.description')}>
+
+<main id="main-content">
 
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0">
@@ -27,48 +37,40 @@ const { lang } = Astro.params as { lang: Lang }
 
         <canvas id="sparks-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-1" aria-hidden="true"></canvas>
 
-        <div class="relative z-10 text-center px-4" style="animation: var(--animate-fade-in-up)">
-            <div class="h-px w-24 bg-linear-to-r from-transparent via-accent to-transparent mx-auto mb-10"></div>
+        <div class="relative z-10 text-center px-4">
             <h1 class="font-display font-black text-text leading-none tracking-tight">
                 <span class="block text-6xl sm:text-8xl md:text-9xl">el DRAC</span>
             </h1>
             <p class="font-display text-gold text-xl sm:text-2xl md:text-3xl mt-4 tracking-wide">
                 de Vilafranca del Penedès
             </p>
-            <div class="h-px w-24 bg-linear-to-r from-transparent via-gold to-transparent mx-auto mt-10"></div>
 
             <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                     href={`/${lang}/el-drac`}
-                    class="px-6 py-3 bg-accent text-white font-semibold rounded-md hover:bg-accent-hover transition-colors duration-200 text-sm"
+                    class="px-6 py-3 bg-accent text-white font-semibold rounded-sm hover:bg-accent-hover transition-colors duration-200 text-sm"
                 >
                     {t(lang, 'nav.dragon')}
                 </a>
                 <a
                     href={`/${lang}/historia/origens`}
-                    class="px-6 py-3 border border-border-light text-text-muted hover:text-text hover:border-gold transition-colors duration-200 text-sm rounded-md"
+                    class="px-6 py-3 border border-border-light text-text-muted hover:text-text hover:border-gold transition-colors duration-200 text-sm rounded-sm"
                 >
                     {t(lang, 'history.title')}
                 </a>
             </div>
         </div>
 
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-40">
-            <div class="w-5 h-8 border border-border-light rounded-full flex items-start justify-center pt-1.5">
-                <div class="w-0.5 h-2 bg-text-muted rounded-full animate-bounce"></div>
-            </div>
-        </div>
     </section>
 
     <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             <div>
-                <div class="h-0.5 w-16 bg-linear-to-r from-accent to-gold mb-6"></div>
                 <h2 class="text-3xl md:text-4xl font-display font-bold text-text mb-6">
                     {t(lang, 'home.intro.title')}
                 </h2>
-                <p class="text-text-muted leading-relaxed text-lg">
+                <p class="text-text leading-relaxed text-lg">
                     {t(lang, 'home.intro.text')}
                 </p>
                 <div class="mt-8 flex flex-wrap gap-3">
@@ -76,23 +78,23 @@ const { lang } = Astro.params as { lang: Lang }
                         href={`/${lang}/el-drac`}
                         class="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-hover font-semibold transition-colors duration-200"
                     >
-                        {t(lang, 'nav.dragon')} →
+                        {t(lang, 'nav.dragon')}
                     </a>
                     <span class="text-border">|</span>
                     <a
                         href={`/${lang}/els-amics-del-drac`}
                         class="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-hover font-semibold transition-colors duration-200"
                     >
-                        {t(lang, 'nav.friends')} →
+                        {t(lang, 'nav.friends')}
                     </a>
                 </div>
             </div>
 
             <div class="space-y-3">
-                <div class="overflow-hidden rounded-lg border border-border bg-bg-card">
+                <div class="overflow-hidden rounded-sm border border-border bg-bg-card">
                     <img
                         id="colla-photo"
-                        src="/images/colla-2023.jpg"
+                        src={latestGalleryImage}
                         alt={t(lang, 'home.intro.photo_caption')}
                         class="w-full h-auto object-cover"
                         loading="lazy"
@@ -101,7 +103,7 @@ const { lang } = Astro.params as { lang: Lang }
                     />
                 </div>
                 <p id="colla-caption" data-base={t(lang, 'home.intro.photo_caption')} class="text-text-subtle text-sm italic text-center">
-                    {t(lang, 'home.intro.photo_caption')}
+                    {t(lang, 'home.intro.photo_caption')}{latestYear ? ` · ${latestYear}` : ''}
                 </p>
             </div>
 
@@ -112,17 +114,14 @@ const { lang } = Astro.params as { lang: Lang }
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="flex items-end justify-between mb-8">
-                <div>
-                    <div class="h-0.5 w-16 bg-linear-to-r from-accent to-gold mb-4"></div>
-                    <h2 class="text-3xl font-display font-bold text-text">
-                        {t(lang, 'home.events.title')}
-                    </h2>
-                </div>
+                <h2 class="text-3xl font-display font-bold text-text">
+                    {t(lang, 'home.events.title')}
+                </h2>
                 <a
                     href={`/${lang}/esdeveniments`}
                     class="text-sm text-accent hover:text-accent-hover font-semibold transition-colors duration-200 shrink-0"
                 >
-                    {t(lang, 'home.events.see_all')} →
+                    {t(lang, 'home.events.see_all')}
                 </a>
             </div>
 
@@ -130,6 +129,8 @@ const { lang } = Astro.params as { lang: Lang }
 
         </div>
     </section>
+
+</main>
 
 <script>
     function initSparks() {
