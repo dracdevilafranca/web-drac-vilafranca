@@ -9,9 +9,6 @@ on:
 permissions:
   contents: read
 
-permissions:
-  contents: read
-
 jobs:
   check-branch:
     if: github.event_name == 'pull_request' && github.base_ref == 'main'
