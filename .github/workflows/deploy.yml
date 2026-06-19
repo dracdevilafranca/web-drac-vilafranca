@@ -42,7 +42,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=drac-vilafranca-web
+          command: pages deploy dist --project-name=web-drac-vilafranca
 
 # Required GitHub secrets (Settings → Secrets and variables → Actions → New repository secret):
 #
@@ -54,6 +54,6 @@ jobs:
 #     Cloudflare Dashboard → right sidebar → Account ID
 #
 # First-time deploy (run locally before GitHub Actions is set up):
-#   npm run build && npx wrangler pages deploy dist --project-name=drac-vilafranca-web
+#   npm run build && npx wrangler pages deploy dist --project-name=web-drac-vilafranca
 #
 # After that, every push to 'main' deploys automatically (~30-60 seconds).
