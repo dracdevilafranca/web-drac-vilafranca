@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../i18n'
 import { t } from '../i18n'
+import PrivacyModal from './PrivacyModal.astro'
 
 interface Props { lang: Lang }
 const { lang } = Astro.props
@@ -29,6 +30,7 @@ const i18n = {
     privacy_consent:        t(lang, 'shop.modal.privacy_consent')       as string,
     privacy_link:           t(lang, 'shop.modal.privacy_link')          as string,
     privacy_required:       t(lang, 'shop.modal.privacy_required')      as string,
+    email_invalid:          t(lang, 'shop.modal.email_invalid')          as string,
     pickup_notice:          t(lang, 'shop.pickup_notice')               as string,
 }
 ---
@@ -42,7 +44,7 @@ const i18n = {
 <div
     id="cart-drawer"
     class="fixed inset-y-0 right-0 z-50 w-full sm:w-96 bg-bg-elevated border-l border-border flex flex-col translate-x-full transition-transform duration-300"
-    aria-label={i18n.title}
+    aria-labelledby="cart-heading"
     role="dialog"
     aria-modal="true"
     data-i18n={JSON.stringify(i18n)}
@@ -68,7 +70,7 @@ const i18n = {
         <div id="cart-footer" class="shrink-0 px-5 py-4 border-t border-border hidden">
             <button
                 id="cart-reserve-btn"
-                class="w-full py-2.5 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover text-sm transition-colors duration-200 cursor-pointer"
+                class="w-full py-2.5 bg-accent text-white font-semibold rounded-sm hover:bg-accent-hover text-sm transition-colors duration-200 cursor-pointer"
             >
                 {i18n.reserve_btn}
             </button>
@@ -86,9 +88,9 @@ const i18n = {
         </div>
 
         <div class="flex-1 overflow-y-auto px-5 py-4 space-y-4">
-            <div id="cart-summary" class="bg-bg rounded-lg border border-border p-3 space-y-1.5 text-sm"></div>
+            <div id="cart-summary" class="bg-bg rounded-sm border border-border p-3 space-y-1.5 text-sm"></div>
 
-            <div class="flex items-start gap-2.5 text-xs text-text-muted bg-bg-elevated border border-border rounded-lg px-3 py-2.5">
+            <div class="flex items-start gap-2.5 text-xs text-text-muted bg-bg-elevated border border-border rounded-sm px-3 py-2.5">
                 <svg class="w-4 h-4 shrink-0 mt-0.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -102,7 +104,7 @@ const i18n = {
                 <input
                     type="text"
                     id="cart-name"
-                    class="w-full bg-bg-card border border-border rounded-md px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
+                    class="w-full bg-bg-card border border-border rounded-sm px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
                     required
                     autocomplete="name"
                 />
@@ -115,7 +117,7 @@ const i18n = {
                 <input
                     type="email"
                     id="cart-email"
-                    class="w-full bg-bg-card border border-border rounded-md px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
+                    class="w-full bg-bg-card border border-border rounded-sm px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
                     required
                     autocomplete="email"
                 />
@@ -129,7 +131,7 @@ const i18n = {
                     id="cart-message"
                     rows="3"
                     placeholder={i18n.message_placeholder}
-                    class="w-full bg-bg-card border border-border rounded-md px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent resize-none"
+                    class="w-full bg-bg-card border border-border rounded-sm px-3 py-2 text-text text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent resize-none"
                 ></textarea>
             </div>
 
@@ -141,11 +143,11 @@ const i18n = {
                 />
                 <span class="text-xs text-text-muted leading-relaxed">
                     {i18n.privacy_consent}
-                    <a
-                        href={`/${lang}/privacitat`}
-                        target="_blank"
-                        class="underline hover:text-text transition-colors duration-150"
-                    >{i18n.privacy_link}</a>.
+                    <button
+                        type="button"
+                        id="cart-privacy-link"
+                        class="underline hover:text-text transition-colors duration-150 cursor-pointer"
+                    >{i18n.privacy_link}</button>.
                 </span>
             </label>
 
@@ -155,7 +157,7 @@ const i18n = {
         <div class="shrink-0 px-5 py-4 border-t border-border">
             <button
                 id="cart-submit-btn"
-                class="w-full py-2.5 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover text-sm transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                class="w-full py-2.5 bg-accent text-white font-semibold rounded-sm hover:bg-accent-hover text-sm transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
             >
                 {i18n.submit}
             </button>
@@ -163,7 +165,7 @@ const i18n = {
     </div>
 
     <div id="cart-success-view" class="flex flex-col flex-1 items-center justify-center gap-4 px-6 text-center hidden">
-        <div class="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+        <div class="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center">
             <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
@@ -171,12 +173,14 @@ const i18n = {
         <p class="text-text leading-relaxed">{i18n.success}</p>
         <button
             id="cart-done-btn"
-            class="px-6 py-2.5 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover text-sm transition-colors duration-200 cursor-pointer"
+            class="px-6 py-2.5 bg-accent text-white font-semibold rounded-sm hover:bg-accent-hover text-sm transition-colors duration-200 cursor-pointer"
         >
             {i18n.cancel}
         </button>
     </div>
 </div>
+
+<PrivacyModal lang={lang} />
 
 <script>
     import { getCart, saveCart, removeFromCart, totalItems } from '../scripts/cart'
@@ -258,12 +262,12 @@ const i18n = {
             cartList.innerHTML = cart.map((item: CartItem, idx: number) => {
                 const details = [item.color, item.size].filter(Boolean).map(escHtml).join(' · ')
                 const imgHtml = item.image
-                    ? `<img src="${escHtml(item.image)}" alt="" class="w-14 h-14 rounded-md object-cover shrink-0 bg-bg" onerror="this.style.display='none'" />`
-                    : `<div class="w-14 h-14 rounded-md shrink-0 bg-bg border border-border flex items-center justify-center text-text-subtle">
+                    ? `<img src="${escHtml(item.image)}" alt="" class="w-14 h-14 rounded-sm object-cover shrink-0 bg-bg" onerror="this.style.display='none'" />`
+                    : `<div class="w-14 h-14 rounded-sm shrink-0 bg-bg border border-border flex items-center justify-center text-text-subtle">
                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18A2.25 2.25 0 0023.25 18V6A2.25 2.25 0 0021 3.75H3A2.25 2.25 0 00.75 6v12A2.25 2.25 0 003 20.25z" /></svg>
                        </div>`
                 return `<li>
-                    <div class="flex items-center gap-3 bg-bg border border-border rounded-lg p-3">
+                    <div class="flex items-center gap-3 bg-bg border border-border rounded-sm p-3">
                         ${imgHtml}
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-medium text-text leading-tight truncate">${escHtml(item.productName)}</p>
@@ -329,6 +333,10 @@ const i18n = {
             const email = emailInput?.value.trim() ?? ''
             const msg   = msgInput?.value.trim()   ?? ''
             if (!name || !email || cart.length === 0) return
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                if (cartError) { cartError.textContent = i18n.email_invalid; cartError.classList.remove('hidden') }
+                return
+            }
 
             const privacyCheck = document.getElementById('cart-privacy') as HTMLInputElement | null
             if (!privacyCheck?.checked) {
@@ -373,8 +381,16 @@ const i18n = {
         document.getElementById('cart-back-btn')?.addEventListener('click', () => { showView('items'); renderItems() })
         document.getElementById('cart-submit-btn')?.addEventListener('click', submitReservation)
 
+        document.getElementById('cart-privacy-link')?.addEventListener('click', () => {
+            document.dispatchEvent(new Event('open-privacy-modal'))
+        })
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !drawer.classList.contains('translate-x-full')) closeDrawer()
+            if (e.key === 'Escape') {
+                const privacyModal = document.getElementById('privacy-modal') as HTMLElement | null
+                if (privacyModal && privacyModal.style.display !== 'none') return
+                if (!drawer.classList.contains('translate-x-full')) closeDrawer()
+            }
         })
 
         document.addEventListener('open-cart', () => openDrawer())

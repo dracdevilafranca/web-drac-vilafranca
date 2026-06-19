@@ -22,7 +22,7 @@ const { lang } = Astro.params as { lang: Lang }
                 subtitle={t(lang, 'contact.intro') as string}
             />
 
-            <div class="bg-bg-card border border-border rounded-lg divide-y divide-border mb-10">
+            <div class="bg-bg-card border border-border rounded-sm divide-y divide-border mb-10">
 
                 <div class="flex gap-4 p-6">
                     <span class="text-gold shrink-0 mt-0.5" aria-hidden="true">
@@ -32,10 +32,10 @@ const { lang } = Astro.params as { lang: Lang }
                         </svg>
                     </span>
                     <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-2">
+                        <p class="text-xs text-text-muted mb-2">
                             {t(lang, 'contact.address_label')}
                         </p>
-                        <address class="not-italic text-text-muted text-sm leading-relaxed space-y-0.5">
+                        <address class="not-italic text-text text-sm leading-relaxed space-y-0.5">
                             <p>{t(lang, 'contact.address')}</p>
                             <p>{t(lang, 'contact.city')}</p>
                         </address>
@@ -49,7 +49,7 @@ const { lang } = Astro.params as { lang: Lang }
                         </svg>
                     </span>
                     <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-2">
+                        <p class="text-xs text-text-muted mb-2">
                             {t(lang, 'contact.email_label')}
                         </p>
                         <ObfuscatedEmail class="text-text-muted text-sm hover:text-text transition-colors duration-200" />
@@ -61,14 +61,14 @@ const { lang } = Astro.params as { lang: Lang }
             <section aria-labelledby="social-title" class="mb-12">
                 <h2
                     id="social-title"
-                    class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-5"
+                    class="font-semibold text-text-muted mb-5"
                 >
                     {t(lang, 'contact.social_label')}
                 </h2>
                 <SocialLinks showHandle />
             </section>
 
-            <p class="text-text-subtle text-sm italic">
+            <p class="text-text-muted text-sm italic">
                 {t(lang, 'contact.thanks')}
             </p>
 

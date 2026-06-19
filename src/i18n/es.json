@@ -1,7 +1,7 @@
 {
     "site": {
         "title": "Drac de Vilafranca del Penedès",
-        "description": "Web oficial de els Amics del Drac de Vilafranca del Penedès. Descubre la historia, las tradiciones y los eventos de una de las figuras festivas más emblemáticas de Cataluña."
+        "description": "Web oficial dels Amics del Drac de Vilafranca del Penedès. Descubre la historia, las tradiciones y los eventos de una de las figuras festivas más emblemáticas de Cataluña."
     },
     "nav": {
         "home": "Inicio",
@@ -179,7 +179,7 @@
         "email": "drac@dracdevilafranca.com"
     },
     "footer": {
-        "entity": "Amics del Drac de Vilafranca",
+        "entity": "Amics del Drac de Vilafranca del Penedès",
         "rights": "Todos los derechos reservados",
         "address": "Carrer Escorxador, 19-21",
         "city": "08720 Vilafranca del Penedès",
@@ -205,7 +205,7 @@
     },
     "shop": {
         "title": "Tienda",
-        "subtitle": "Todos los productos oficiales dels Amics del Drac de Vilafranca del Penedès.",
+        "subtitle": "Artículos oficiales dels Amics del Drac de Vilafranca del Penedès.",
         "pickup_notice": "Recogida en mano · No realizamos envíos. Os avisaremos cuando los artículos estén listos para recoger en Vilafranca del Penedès.",
         "reserve_btn": "Reservar",
         "load_error": "Error al cargar los productos. Por favor, recarga la página.",
@@ -228,7 +228,8 @@
             "error": "Ha habido un error al enviar la reserva. Por favor, inténtalo de nuevo.",
             "privacy_consent": "He leído y acepto la",
             "privacy_link": "política de privacidad",
-            "privacy_required": "Debes aceptar la política de privacidad para continuar."
+            "privacy_required": "Debes aceptar la política de privacidad para continuar.",
+            "email_invalid": "Introduce una dirección de correo electrónico válida."
         },
         "cart": {
             "title": "Cesta",

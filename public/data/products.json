@@ -59,9 +59,20 @@
     },
     {
         "id": "sticker",
-        "image": "/images/shop/enganxines.jpg",
+        "image": "/images/shop/enganxina-drac-negre.jpg",
         "sizes": [],
-        "colors": [],
+        "colors": [
+            {
+                "name": "Negre",
+                "hex": "#1a1a1a",
+                "images": ["/images/shop/enganxina-drac-negre.jpg"]
+            },
+            {
+                "name": "Blanca",
+                "hex": "#f5f5f5",
+                "images": ["/images/shop/enganxina-drac-blanca.jpg"]
+            }
+        ],
         "name": {
             "ca": "Enganxines",
             "es": "Pegatinas",

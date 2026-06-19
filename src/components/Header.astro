@@ -37,7 +37,7 @@ const historyChildren = [
 const isPresentationActive = presentationChildren.some(({ slug }) => isActive(slug))
 
 const navLinkClass = (slug: string) =>
-    `px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+    `px-3 py-2 text-sm rounded-sm transition-colors duration-200 ${
         isActive(slug) ? 'text-text' : 'text-text-muted hover:text-text'
     }`
 ---
@@ -57,7 +57,7 @@ const navLinkClass = (slug: string) =>
 
                 <div class="relative group">
                     <span
-                        class={`flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors duration-200 select-none cursor-default ${isPresentationActive ? 'text-text' : 'text-text-muted group-hover:text-text'}`}
+                        class={`flex items-center gap-1 px-3 py-2 text-sm rounded-sm transition-colors duration-200 select-none cursor-default ${isPresentationActive ? 'text-text' : 'text-text-muted group-hover:text-text'}`}
                         aria-hidden="true"
                     >
                         {t(lang, 'nav.presentation')}
@@ -72,7 +72,7 @@ const navLinkClass = (slug: string) =>
                     <!-- Invisible bridge: fills the gap between trigger and dropdown so hover isn't lost while moving the cursor -->
                     <div class="absolute top-full inset-x-0 h-2 z-50" aria-hidden="true"></div>
                     <ul
-                        class="absolute top-full left-0 mt-1 w-52 bg-bg-elevated border border-border rounded-lg shadow-xl
+                        class="absolute top-full left-0 mt-1 w-52 bg-bg-elevated border border-border rounded-sm shadow-xl
                                opacity-0 invisible pointer-events-none
                                group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto
                                transition-all duration-200 z-50 py-1"
@@ -96,7 +96,7 @@ const navLinkClass = (slug: string) =>
 
                 <div class="relative group">
                     <span
-                        class={`flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors duration-200 select-none cursor-default ${isActive('historia') ? 'text-text' : 'text-text-muted group-hover:text-text'}`}
+                        class={`flex items-center gap-1 px-3 py-2 text-sm rounded-sm transition-colors duration-200 select-none cursor-default ${isActive('historia') ? 'text-text' : 'text-text-muted group-hover:text-text'}`}
                         aria-hidden="true"
                     >
                         {t(lang, 'nav.history')}
@@ -111,7 +111,7 @@ const navLinkClass = (slug: string) =>
                     <!-- Invisible bridge: fills the gap between trigger and dropdown so hover isn't lost while moving the cursor -->
                     <div class="absolute top-full inset-x-0 h-2 z-50" aria-hidden="true"></div>
                     <ul
-                        class="absolute top-full left-0 mt-1 w-52 bg-bg-elevated border border-border rounded-lg shadow-xl
+                        class="absolute top-full left-0 mt-1 w-52 bg-bg-elevated border border-border rounded-sm shadow-xl
                                opacity-0 invisible pointer-events-none
                                group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto
                                transition-all duration-200 z-50 py-1"
@@ -147,7 +147,7 @@ const navLinkClass = (slug: string) =>
             <div class="flex items-center gap-2 shrink-0">
                 <button
                     id="cart-toggle"
-                    class="relative p-1.5 rounded-md text-text-muted hover:text-text transition-colors duration-200"
+                    class:list={['relative p-1.5 rounded-sm text-text-muted hover:text-text transition-colors duration-200', { 'hidden': currentSlug !== 'botiga' }]}
                     aria-label={t(lang, 'shop.cart.open')}
                 >
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -166,7 +166,7 @@ const navLinkClass = (slug: string) =>
                             href={langSwitchUrl(l)}
                             class={`px-2 py-0.5 text-xs font-bold rounded transition-colors duration-200 ${
                                 l === lang
-                                    ? 'bg-accent text-white'
+                                    ? 'text-accent'
                                     : 'text-text-subtle border border-border hover:text-text hover:border-border-light'
                             }`}
                             aria-current={l === lang ? 'page' : undefined}
@@ -180,7 +180,7 @@ const navLinkClass = (slug: string) =>
 
                 <button
                     id="menu-toggle"
-                    class="lg:hidden p-1.5 rounded-md text-text-muted hover:text-text transition-colors duration-200"
+                    class="lg:hidden p-1.5 rounded-sm text-text-muted hover:text-text transition-colors duration-200"
                     aria-expanded="false"
                     aria-controls="mobile-menu"
                     aria-label={t(lang, 'nav.open_menu')}
@@ -210,7 +210,7 @@ const navLinkClass = (slug: string) =>
         <nav aria-label={t(lang, 'nav.mobile_nav')}>
             <ul class="flex flex-col gap-0.5">
                 <li>
-                    <a href={`/${lang}/`} class="block px-4 py-3 text-lg font-medium text-text-muted hover:text-text hover:bg-surface rounded-lg transition-colors duration-200">
+                    <a href={`/${lang}/`} class="block px-4 py-3 text-lg font-medium text-text-muted hover:text-text hover:bg-surface rounded-sm transition-colors duration-200">
                         {t(lang, 'nav.home')}
                     </a>
                 </li>
@@ -243,17 +243,17 @@ const navLinkClass = (slug: string) =>
                     </ul>
                 </li>
                 <li>
-                    <a href={`/${lang}/esdeveniments`} class="block px-4 py-3 text-lg font-medium text-text-muted hover:text-text hover:bg-surface rounded-lg transition-colors duration-200">
+                    <a href={`/${lang}/esdeveniments`} class="block px-4 py-3 text-lg font-medium text-text-muted hover:text-text hover:bg-surface rounded-sm transition-colors duration-200">
                         {t(lang, 'nav.events')}
                     </a>
                 </li>
                 <li>
-                    <a href={`/${lang}/botiga`} class="block px-4 py-3 text-lg font-medium text-text-muted hover:text-text hover:bg-surface rounded-lg transition-colors duration-200">
+                    <a href={`/${lang}/botiga`} class="block px-4 py-3 text-lg font-medium text-text-muted hover:text-text hover:bg-surface rounded-sm transition-colors duration-200">
                         {t(lang, 'nav.shop')}
                     </a>
                 </li>
                 <li>
-                    <a href={`/${lang}/contacte`} class="block px-4 py-3 text-lg font-medium text-text-muted hover:text-text hover:bg-surface rounded-lg transition-colors duration-200">
+                    <a href={`/${lang}/contacte`} class="block px-4 py-3 text-lg font-medium text-text-muted hover:text-text hover:bg-surface rounded-sm transition-colors duration-200">
                         {t(lang, 'nav.contact')}
                     </a>
                 </li>
@@ -266,9 +266,9 @@ const navLinkClass = (slug: string) =>
                 {LANGUAGES.map((l) => (
                     <a
                         href={langSwitchUrl(l)}
-                        class={`px-4 py-2 text-sm font-bold rounded-md transition-colors duration-200 ${
+                        class={`px-4 py-2 text-sm font-bold rounded-sm transition-colors duration-200 ${
                             l === lang
-                                ? 'bg-accent text-white'
+                                ? 'text-accent'
                                 : 'text-text-muted border border-border hover:text-text hover:border-border-light'
                         }`}
                         lang={l}
@@ -322,9 +322,12 @@ const navLinkClass = (slug: string) =>
     import { getCart, totalItems } from '../scripts/cart'
 
     function updateBadge() {
+        const btn   = document.getElementById('cart-toggle')
         const badge = document.getElementById('cart-badge')
         if (!badge) return
         const count = totalItems(getCart())
+        const isShopPage = window.location.pathname.includes('/botiga')
+        if (btn) btn.classList.toggle('hidden', !isShopPage && count === 0)
         badge.textContent = count > 9 ? '9+' : String(count)
         badge.classList.toggle('hidden', count === 0)
     }
