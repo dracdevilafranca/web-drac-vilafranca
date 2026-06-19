@@ -179,7 +179,7 @@
         "email": "drac@dracdevilafranca.com"
     },
     "footer": {
-        "entity": "Amics del Drac de Vilafranca",
+        "entity": "Amics del Drac de Vilafranca del Penedès",
         "rights": "All rights reserved",
         "address": "Carrer Escorxador, 19-21",
         "city": "08720 Vilafranca del Penedès",
@@ -205,7 +205,7 @@
     },
     "shop": {
         "title": "Shop",
-        "subtitle": "All official products from els Amics del Drac de Vilafranca del Penedès.",
+        "subtitle": "Official items from els Amics del Drac de Vilafranca del Penedès.",
         "pickup_notice": "Collection only · We do not ship. We will contact you when your items are ready for collection in Vilafranca del Penedès.",
         "reserve_btn": "Reserve",
         "load_error": "Error loading products. Please reload the page.",
@@ -228,7 +228,8 @@
             "error": "There was an error sending your reservation. Please try again.",
             "privacy_consent": "I have read and accept the",
             "privacy_link": "privacy policy",
-            "privacy_required": "You must accept the privacy policy to continue."
+            "privacy_required": "You must accept the privacy policy to continue.",
+            "email_invalid": "Please enter a valid email address."
         },
         "cart": {
             "title": "Cart",

@@ -23,14 +23,14 @@ const historyParagraphs = t(lang, 'friends.history_paragraphs') as string[]
             <section class="mb-16" aria-labelledby="history-title">
                 <h2
                     id="history-title"
-                    class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-6"
+                    class="font-display text-xl font-semibold text-text mb-6"
                 >
                     {t(lang, 'friends.history_title')}
                 </h2>
 
                 <div class="space-y-5">
                     {historyParagraphs.slice(0, 4).map((p) => (
-                        <p class="text-text-muted leading-relaxed">{p}</p>
+                        <p class="text-text leading-relaxed">{p}</p>
                     ))}
                 </div>
 
@@ -47,7 +47,7 @@ const historyParagraphs = t(lang, 'friends.history_paragraphs') as string[]
 
                 <div class="space-y-5">
                     {historyParagraphs.slice(4).map((p) => (
-                        <p class="text-text-muted leading-relaxed">{p}</p>
+                        <p class="text-text leading-relaxed">{p}</p>
                     ))}
                 </div>
             </section>
@@ -57,11 +57,11 @@ const historyParagraphs = t(lang, 'friends.history_paragraphs') as string[]
             <section class="mb-16" aria-labelledby="gaudeamus-title">
                 <h2
                     id="gaudeamus-title"
-                    class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-6"
+                    class="font-display text-xl font-semibold text-text mb-6"
                 >
                     {t(lang, 'friends.gaudeamus_title')}
                 </h2>
-                <p class="text-text-muted leading-relaxed">
+                <p class="text-text leading-relaxed">
                     {t(lang, 'friends.gaudeamus_text')}
                 </p>
             </section>
@@ -71,7 +71,7 @@ const historyParagraphs = t(lang, 'friends.history_paragraphs') as string[]
             <section class="mb-16" aria-labelledby="gallery-title">
                 <h2
                     id="gallery-title"
-                    class="text-xs font-bold uppercase tracking-widest text-text-subtle mb-6"
+                    class="font-display text-xl font-semibold text-text mb-6"
                 >
                     {t(lang, 'friends.gallery_title')}
                 </h2>

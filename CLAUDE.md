@@ -19,7 +19,7 @@ Desplegament: **Cloudflare Pages** (branca `main` → deploy automàtic via CI/C
 
 ## Estructura clau
 
-```
+``` text
 src/
   components/        # Components reutilitzables Astro
   i18n/              # ca.json, es.json, en.json + index.ts
@@ -43,7 +43,7 @@ Les claus noves s'han d'afegir als tres fitxers (`ca.json`, `es.json`, `en.json`
 ## Components reutilitzables creats
 
 | Component | Props clau | Usat a |
-|---|---|---|
+| --- | --- | --- |
 | `PageHeader.astro` | `title`, `subtitle?`, `supertitle?` | 11 pàgines |
 | `SocialLinks.astro` | `showHandle?` | Footer, Contacte |
 | `ContentImage.astro` | `src`, `alt`, `width`, `height`, `caption?`, `smallCaption?`, `imageClass?` | el-drac, els-amics, origens |

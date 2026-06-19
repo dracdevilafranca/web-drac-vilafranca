@@ -44,7 +44,7 @@
     "dragon": {
         "title": "El Drac",
         "paragraphs": [
-            "El cos del Drac està format pel cap (fet d'una sola peça de fusta de figuera) i la resta del tronc (de fusta, cartró i pell de cavall) que amb el temps ha anat sofrint diverses reparacions, afegint materials artificials més recents. La figura que veiem actualment té en el cap el seu element més signifcatiu, i un cos similar a una serp. Després del coll, el cos es va eixamplant, fins arribar al seu diàmetre màxim a la part de la panxa, i a partir d'aquí es va estrenyent fins a formar la cua enroscada, que culmina amb una sageta vermella. Les ales de rat-penat estan situades a la part superior de la panxa, i estan fetes d'una planxa de conglomerat, llises a la cara interior, i treballades a l'exterior. Tot el cos està pintat primer amb una capa de pintura ignífuga d'un color verd clar i, posteriorment, amb una capa de color verd fosc barrejada amb oli de llinosa.",
+            "El cos del Drac està format pel cap (fet d'una sola peça de fusta de figuera) i la resta del tronc (de fusta, cartró i pell de cavall) que amb el temps ha anat sofrint diverses reparacions, afegint materials artificials més recents. La figura que veiem actualment té en el cap el seu element més significatiu, i un cos similar a una serp. Després del coll, el cos es va eixamplant, fins arribar al seu diàmetre màxim a la part de la panxa, i a partir d'aquí es va estrenyent fins a formar la cua enroscada, que culmina amb una sageta vermella. Les ales de rat-penat estan situades a la part superior de la panxa, i estan fetes d'una planxa de conglomerat, llises a la cara interior, i treballades a l'exterior. Tot el cos està pintat primer amb una capa de pintura ignífuga d'un color verd clar i, posteriorment, amb una capa de color verd fosc barrejada amb oli de llinosa.",
             "La boca està tota pintada de vermell, amb els llavis d'un blanc trencat. A la mandíbula inferior hi ha els dos orificis que serveixen per ajustar-hi la peça cruciforme de ferro que s'utilitza per posar-hi els coets, coneguda com a forquilla. Així mateix, a les ales i a la cua hi porta un altre element, també de ferro, amb la mateixa funció. Tot plegat permet que quan balla ho faci amb 18 coets. Per encendre els coets de la boca s'utilitza una metxa de cotó formada per tres cordes trenades. Quan balla s'utilitza la porra per encendre els coets de les ales i la cua, que queden enlairades.",
             "Les seves dimensions són: 395 cm de llarg, 110 cm d'amplada, 135 cm d'alçada i amb un pes, inclosos tots els estris que duu quan apareix en públic, de 115,83 kg."
         ],
@@ -179,7 +179,7 @@
         "email": "drac@dracdevilafranca.com"
     },
     "footer": {
-        "entity": "Amics del Drac de Vilafranca",
+        "entity": "Amics del Drac de Vilafranca del Penedès",
         "rights": "Tots els drets reservats",
         "address": "Carrer Escorxador, 19-21",
         "city": "08720 Vilafranca del Penedès",
@@ -205,7 +205,7 @@
     },
     "shop": {
         "title": "Botiga",
-        "subtitle": "Tots els productes oficials dels Amics del Drac de Vilafranca del Penedès.",
+        "subtitle": "Articles oficials dels Amics del Drac de Vilafranca del Penedès.",
         "pickup_notice": "Recollida en mà · No fem enviaments. Us avisarem quan els articles estiguin llestos per recollir a Vilafranca del Penedès.",
         "reserve_btn": "Reservar",
         "load_error": "Error en carregar els productes. Si us plau, recarrega la pàgina.",
@@ -228,7 +228,8 @@
             "error": "Hi ha hagut un error en enviar la reserva. Si us plau, torna-ho a intentar.",
             "privacy_consent": "He llegit i accepto la",
             "privacy_link": "política de privacitat",
-            "privacy_required": "Has d'acceptar la política de privacitat per continuar."
+            "privacy_required": "Has d'acceptar la política de privacitat per continuar.",
+            "email_invalid": "Introduïu una adreça de correu electrònic vàlida."
         },
         "cart": {
             "title": "Cistella",
