@@ -1,8 +1,8 @@
 name: Deploy to Cloudflare Pages
 
 on:
-  push:
-    branches: [main]
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -59,4 +59,13 @@ jobs:
 # First-time deploy (run locally before GitHub Actions is set up):
 #   npm run build && npx wrangler pages deploy dist --project-name=web-drac-vilafranca
 #
-# After that, every push to 'main' deploys automatically (~30-60 seconds).
+# Deploy is triggered by publishing a GitHub Release (not by push to main).
+# Workflow: feature/* → PR → develop → PR → main → GitHub Release → deploy
+#
+# To release:
+#   1. Merge develop → main via PR (CI must pass)
+#   2. GitHub → Releases → Draft a new release
+#   3. Create a new tag (e.g. v1.2.0) pointing to main
+#   4. Publish release → this workflow runs → deploy to Cloudflare Pages
+#
+# For emergency manual deploy: Actions → Deploy to Cloudflare Pages → Run workflow
