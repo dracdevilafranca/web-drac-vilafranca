@@ -20,9 +20,9 @@ Desplegament: **Cloudflare Pages** (branca `main` → deploy automàtic via CI/C
 ``` text
 src/
   components/        # Components reutilitzables Astro
-  i18n/              # ca.json, es.json, en.json + index.ts
+  i18n/              # ca.json, en.json + index.ts
   layouts/           # BaseLayout.astro (HTML base, SEO, JSON-LD)
-  pages/[lang]/      # Totes les pàgines (SSG per lang: ca, es, en)
+  pages/[lang]/      # Totes les pàgines (SSG per lang: ca, en)
   data/              # privacy.ts (text de la política de privacitat)
   styles/            # app.css (tema Tailwind + keyframes)
 public/
@@ -32,9 +32,9 @@ public/
 
 ## Idiomes
 
-Tres idiomes: `ca` (default), `es`, `en`. Totes les pàgines sota `/[lang]/`.  
+Dos idiomes: `ca` (default) i `en`. Totes les pàgines sota `/[lang]/`. El castellà s'ha retirat; `/es/*` redirigeix a `/ca/*` (`public/_redirects`).  
 El helper `t(lang, 'clau')` llegeix les claus de `src/i18n/*.json`.  
-Les claus noves s'han d'afegir als tres fitxers (`ca.json`, `es.json`, `en.json`).
+Les claus noves s'han d'afegir als dos fitxers (`ca.json`, `en.json`), i els textos de `products.json`, `events.json` i `src/data/privacy.ts` també han de tenir `ca` i `en`.
 
 ## Components reutilitzables creats
 
@@ -48,21 +48,21 @@ Les claus noves s'han d'afegir als tres fitxers (`ca.json`, `es.json`, `en.json`
 
 ### Implementat i funcional
 
-- **43 pàgines** generant correctament (build net, 0 errors)
+- **29 pàgines** generant correctament (14 per idioma + redirecció arrel; build net, 0 errors)
 - **15 tests passant** (i18n)
 - **0 errors ESLint**
 - **CI/CD** via GitHub Actions (astro check → eslint → vitest → build)
 - **Botiga** en mode catàleg (colors, carrusel d'imatges, swipe tàctil) amb avís de contacte per correu i recollida en mà
-- **Pàgina de privacitat** (`/[lang]/privacitat`) en tres idiomes; el web no recull dades amb formularis
+- **Pàgina de privacitat** (`/[lang]/privacitat`) en català i anglès; el web no recull dades amb formularis
+- **SEO**: sitemap (`@astrojs/sitemap`), hreflang, Open Graph, Twitter Card, JSON-LD Organization
+- **Security headers** (`_headers`): CSP, X-Frame-Options, Referrer-Policy, Permissions-Policy
+- **Animació canvas hero** pausada amb `IntersectionObserver` quan no és visible
 
 ### Reserves aparcades
 
 La reserva en línia (API `functions/api/reserva.ts` amb Resend, modal de reserva, carret i modal de privacitat) s'ha retirat de `develop` i es conserva a la branca `feature/reserves`.
 Per recuperar-la: fer `git revert` del commit que la va retirar (`chore(shop): park online reservations`). Fusionar `feature/reserves` no la restaura.
 Abans de tornar-la a publicar cal protegir l'API contra abusos (Turnstile/honeypot, rate limiting, validar productes i consentiment al servidor).
-- **SEO**: sitemap (`@astrojs/sitemap`), hreflang, Open Graph, Twitter Card, JSON-LD Organization
-- **Security headers** (`_headers`): CSP, X-Frame-Options, Referrer-Policy, Permissions-Policy
-- **Animació canvas hero** pausada amb `IntersectionObserver` quan no és visible
 
 ### Millores de performance pendents (no implementades)
 

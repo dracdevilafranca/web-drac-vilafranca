@@ -45,42 +45,6 @@ export const privacyContent: Record<string, PrivacyContent> = {
             },
         ],
     },
-    es: {
-        sections: [
-            {
-                heading: 'Responsable del tratamiento',
-                body: `${contact.entity}, con dirección en ${contact.address} y correo de contacto ${contact.email}.`,
-            },
-            {
-                heading: 'Datos recogidos',
-                body: `Este sitio web no recoge datos personales mediante formularios. Si nos escribís por correo electrónico, trataremos los datos que nos facilitéis: nombre, dirección de correo electrónico y el contenido del mensaje.`,
-            },
-            {
-                heading: 'Finalidad',
-                body: `Atender vuestras consultas y, en su caso, gestionar la adquisición de artículos de la tienda.`,
-            },
-            {
-                heading: 'Legitimación',
-                body: `El tratamiento se basa en el consentimiento del interesado al ponerse en contacto con nosotros, de acuerdo con el artículo 6.1.a del Reglamento General de Protección de Datos (RGPD).`,
-            },
-            {
-                heading: 'Conservación',
-                body: `Los datos se conservarán el tiempo necesario para atender vuestra consulta y, como máximo, un año, o hasta que se solicite su supresión.`,
-            },
-            {
-                heading: 'Destinatarios',
-                body: `No se cederán datos a terceros, salvo obligación legal.`,
-            },
-            {
-                heading: 'Cookies',
-                body: `Este sitio web no utiliza cookies propias ni de seguimiento. Las tipografías se cargan desde Google Fonts, por lo que vuestro navegador se conecta a los servidores de Google para obtenerlas.`,
-            },
-            {
-                heading: 'Derechos',
-                body: `Podéis ejercer los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición dirigiéndoos a ${contact.email}. Si consideráis que el tratamiento no es conforme a la normativa vigente, tenéis derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (${contact.aepd}).`,
-            },
-        ],
-    },
     en: {
         sections: [
             {
