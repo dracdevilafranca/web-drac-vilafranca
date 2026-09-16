@@ -1,12 +1,11 @@
 import ca from './ca.json'
-import es from './es.json'
 import en from './en.json'
 
-export const LANGUAGES = ['ca', 'es', 'en'] as const
+export const LANGUAGES = ['ca', 'en'] as const
 export type Lang = (typeof LANGUAGES)[number]
 export const DEFAULT_LANG: Lang = 'ca'
 
-const translations = { ca, es, en }
+const translations = { ca, en }
 
 function getNestedValue(obj: Record<string, unknown>, keys: string[]): unknown {
     return keys.reduce((acc: unknown, key: string) => {

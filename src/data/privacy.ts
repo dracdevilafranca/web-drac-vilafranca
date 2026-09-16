@@ -17,59 +17,31 @@ export const privacyContent: Record<string, PrivacyContent> = {
             },
             {
                 heading: 'Dades recollides',
-                body: `Nom i cognoms, correu electrònic i, opcionalment, un missatge. Aquestes dades es faciliten voluntàriament a través del formulari de reserva de la botiga.`,
+                body: `Aquest web no recull dades personals mitjançant formularis. Si ens escriviu per correu electrònic, tractarem les dades que ens faciliteu: nom, adreça de correu electrònic i el contingut del missatge.`,
             },
             {
                 heading: 'Finalitat',
-                body: `Gestionar les reserves de productes de la botiga oficial i enviar la confirmació per correu electrònic.`,
+                body: `Atendre les vostres consultes i, si és el cas, gestionar l'adquisició d'articles de la botiga.`,
             },
             {
                 heading: 'Legitimació',
-                body: `El tractament es basa en el consentiment de l'interessat, d'acord amb l'article 6.1.a del Reglament General de Protecció de Dades (RGPD).`,
+                body: `El tractament es basa en el consentiment de l'interessat en posar-se en contacte amb nosaltres, d'acord amb l'article 6.1.a del Reglament General de Protecció de Dades (RGPD).`,
             },
             {
                 heading: 'Conservació',
-                body: `Les dades es conservaran durant un màxim d'un any a partir de la data de la reserva, o fins que se'n sol·liciti la supressió.`,
+                body: `Les dades es conservaran el temps necessari per atendre la vostra consulta i, com a màxim, un any, o fins que se'n sol·liciti la supressió.`,
             },
             {
                 heading: 'Destinataris',
-                body: `No se cediran dades a tercers, excepte per obligació legal. Fem servir Resend (resend.com) com a encarregat del tractament per a l'enviament de correus de confirmació.`,
+                body: `No se cediran dades a tercers, excepte per obligació legal.`,
+            },
+            {
+                heading: 'Galetes',
+                body: `Aquest web no utilitza galetes pròpies ni de seguiment. Les tipografies es carreguen des de Google Fonts, de manera que el vostre navegador es connecta als servidors de Google per obtenir-les.`,
             },
             {
                 heading: 'Drets',
                 body: `Podeu exercir els drets d'accés, rectificació, supressió, limitació, portabilitat i oposició dirigint-vos a ${contact.email}. Si considereu que el tractament no és conforme a la normativa vigent, teniu dret a presentar una reclamació davant l'Agència Espanyola de Protecció de Dades (${contact.aepd}).`,
-            },
-        ],
-    },
-    es: {
-        sections: [
-            {
-                heading: 'Responsable del tratamiento',
-                body: `${contact.entity}, con dirección en ${contact.address} y correo de contacto ${contact.email}.`,
-            },
-            {
-                heading: 'Datos recogidos',
-                body: `Nombre y apellidos, correo electrónico y, opcionalmente, un mensaje. Estos datos se facilitan voluntariamente a través del formulario de reserva de la tienda.`,
-            },
-            {
-                heading: 'Finalidad',
-                body: `Gestionar las reservas de productos de la tienda oficial y enviar la confirmación por correo electrónico.`,
-            },
-            {
-                heading: 'Legitimación',
-                body: `El tratamiento se basa en el consentimiento del interesado, de acuerdo con el artículo 6.1.a del Reglamento General de Protección de Datos (RGPD).`,
-            },
-            {
-                heading: 'Conservación',
-                body: `Los datos se conservarán durante un máximo de un año desde la fecha de la reserva, o hasta que se solicite su supresión.`,
-            },
-            {
-                heading: 'Destinatarios',
-                body: `No se cederán datos a terceros, salvo obligación legal. Utilizamos Resend (resend.com) como encargado del tratamiento para el envío de correos de confirmación.`,
-            },
-            {
-                heading: 'Derechos',
-                body: `Podéis ejercer los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición dirigiéndoos a ${contact.email}. Si consideráis que el tratamiento no es conforme a la normativa vigente, tenéis derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (${contact.aepd}).`,
             },
         ],
     },
@@ -81,23 +53,27 @@ export const privacyContent: Record<string, PrivacyContent> = {
             },
             {
                 heading: 'Data collected',
-                body: `Full name, email address and, optionally, a message. This data is provided voluntarily through the shop reservation form.`,
+                body: `This website does not collect personal data through forms. If you contact us by email, we will process the data you provide: your name, email address and the content of your message.`,
             },
             {
                 heading: 'Purpose',
-                body: `To process product reservations from the official shop and send a confirmation email.`,
+                body: `To answer your enquiries and, where applicable, to arrange the purchase of items from the shop.`,
             },
             {
                 heading: 'Legal basis',
-                body: `Processing is based on the consent of the data subject, in accordance with Article 6(1)(a) of the General Data Protection Regulation (GDPR).`,
+                body: `Processing is based on the consent you give by contacting us, in accordance with Article 6(1)(a) of the General Data Protection Regulation (GDPR).`,
             },
             {
                 heading: 'Retention',
-                body: `Data will be kept for a maximum of one year from the reservation date, or until deletion is requested.`,
+                body: `Data will be kept for as long as needed to answer your enquiry and for no more than one year, or until deletion is requested.`,
             },
             {
                 heading: 'Recipients',
-                body: `Data will not be shared with third parties except as required by law. We use Resend (resend.com) as a data processor for sending confirmation emails.`,
+                body: `Data will not be shared with third parties except as required by law.`,
+            },
+            {
+                heading: 'Cookies',
+                body: `This website does not use its own or tracking cookies. Fonts are loaded from Google Fonts, which means your browser connects to Google's servers to fetch them.`,
             },
             {
                 heading: 'Your rights',

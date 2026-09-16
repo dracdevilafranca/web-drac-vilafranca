@@ -23,12 +23,10 @@
         ],
         "name": {
             "ca": "Samarreta El Drac",
-            "es": "Camiseta El Drac",
             "en": "El Drac T-Shirt"
         },
         "desc": {
             "ca": "Samarreta oficial del Drac de Vilafranca. Teixit 100% cotó. Talles adultes XS a 3XL.",
-            "es": "Camiseta oficial del Drac de Vilafranca. Tejido 100% algodón. Tallas adultas XS a 3XL.",
             "en": "Official T-shirt of the Drac de Vilafranca. 100% cotton. Adult sizes XS to 3XL."
         }
     },
@@ -48,12 +46,10 @@
         ],
         "name": {
             "ca": "Samarreta El Drac (infantil)",
-            "es": "Camiseta El Drac (infantil)",
             "en": "El Drac T-Shirt (kids)"
         },
         "desc": {
             "ca": "Samarreta oficial del Drac per als més petits. Teixit suau 100% cotó. De 1 a 14 anys.",
-            "es": "Camiseta oficial del Drac para los más pequeños. Tejido suave 100% algodón. De 1 a 14 años.",
             "en": "Official T-shirt of the Drac for the youngest ones. Soft 100% cotton. Ages 1 to 14."
         }
     },
@@ -75,12 +71,10 @@
         ],
         "name": {
             "ca": "Enganxines",
-            "es": "Pegatinas",
             "en": "Stickers"
         },
         "desc": {
             "ca": "Pack d'enganxines oficials del Drac de Vilafranca del Penedès.",
-            "es": "Pack de pegatinas oficiales del Drac de Vilafranca del Penedès.",
             "en": "Official sticker pack of the Drac de Vilafranca del Penedès."
         }
     }

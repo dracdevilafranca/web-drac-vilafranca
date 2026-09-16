@@ -2,7 +2,6 @@
 import '../styles/app.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-import CartDrawer from '../components/CartDrawer.astro'
 import { t, getAlternateUrls } from '../i18n'
 import type { Lang } from '../i18n'
 
@@ -28,7 +27,7 @@ const alternates = getAlternateUrls(Astro.url.pathname).map(({ lang: l, url }) =
 }))
 const xDefault = Astro.site ? new URL('/ca/', Astro.site).href : '/ca/'
 
-const ogLocale = lang === 'ca' ? 'ca_ES' : lang === 'es' ? 'es_ES' : 'en_GB'
+const ogLocale = lang === 'ca' ? 'ca_ES' : 'en_GB'
 
 const jsonLd = {
     '@context': 'https://schema.org',
@@ -102,6 +101,5 @@ const jsonLd = {
         <Header lang={lang} />
         <slot />
         <Footer lang={lang} />
-        <CartDrawer lang={lang} />
     </body>
 </html>

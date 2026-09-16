@@ -2,3 +2,5 @@
 # Format: [origen]  [destí]  [codi]
 
 /  /ca/  301
+/es  /ca/  301
+/es/*  /ca/:splat  301

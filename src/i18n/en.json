@@ -206,48 +206,10 @@
     "shop": {
         "title": "Shop",
         "subtitle": "Official items from els Amics del Drac de Vilafranca del Penedès.",
-        "pickup_notice": "Collection only · We do not ship. We will contact you when your items are ready for collection in Vilafranca del Penedès.",
-        "reserve_btn": "Reserve",
+        "pickup_notice": "Collection only, in Vilafranca del Penedès · We do not ship.",
+        "contact_notice": "To buy any item, email us at",
         "load_error": "Error loading products. Please reload the page.",
-        "kids_sizes": ["1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10 years","11 years","12 years","13 years","14 years"],
-        "modal": {
-            "title": "Make a reservation",
-            "size_label": "Size",
-            "size_placeholder": "Select a size",
-            "color_label": "Colour",
-            "color_placeholder": "Select a colour",
-            "quantity_label": "Quantity",
-            "name_label": "Full name",
-            "email_label": "Email address",
-            "message_label": "Message (optional)",
-            "message_placeholder": "Any additional comments...",
-            "submit": "Confirm reservation",
-            "cancel": "Cancel",
-            "sending": "Sending...",
-            "success": "Reservation sent successfully. You will receive a confirmation email shortly.",
-            "error": "There was an error sending your reservation. Please try again.",
-            "privacy_consent": "I have read and accept the",
-            "privacy_link": "privacy policy",
-            "privacy_required": "You must accept the privacy policy to continue.",
-            "email_invalid": "Please enter a valid email address."
-        },
-        "cart": {
-            "title": "Cart",
-            "open": "Open cart",
-            "empty": "Your cart is empty.",
-            "add_btn": "Add to cart",
-            "added": "Added!",
-            "remove": "Remove",
-            "reserve_btn": "Make reservation",
-            "back": "Back",
-            "confirm_title": "Complete reservation",
-            "modal_title": "Add to cart",
-            "add_confirm": "Add",
-            "items_singular": "item",
-            "items_plural": "items",
-            "reserve_count_singular": "Reserve {n} item",
-            "reserve_count_plural": "Reserve {n} items"
-        }
+        "kids_sizes": ["1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10 years","11 years","12 years","13 years","14 years"]
     },
     "common": {
         "back_home": "Back to home",
@@ -255,7 +217,6 @@
         "loading": "Loading...",
         "see_all": "See all",
         "lang_ca": "Catalan",
-        "lang_es": "Spanish",
         "lang_en": "English"
     }
 }

@@ -8,16 +8,14 @@ describe('t()', () => {
 
     it('returns the same key translated for all supported languages', () => {
         const caTitle = t('ca', 'site.title')
-        const esTitle = t('es', 'site.title')
         const enTitle = t('en', 'site.title')
         expect(typeof caTitle).toBe('string')
-        expect(typeof esTitle).toBe('string')
         expect(typeof enTitle).toBe('string')
     })
 
     it('falls back to ca when key is missing in target lang', () => {
         const caValue = t('ca', 'site.title')
-        expect(t('es', 'site.title')).toBeTruthy()
+        expect(t('en', 'site.title')).toBeTruthy()
         expect(caValue).toBeTruthy()
     })
 
@@ -28,19 +26,20 @@ describe('t()', () => {
 
     it('returns nested values via dot notation', () => {
         expect(t('ca', 'nav.home')).toBeTruthy()
-        expect(t('es', 'nav.home')).toBeTruthy()
+        expect(t('en', 'nav.home')).toBeTruthy()
     })
 })
 
 describe('getLangFromUrl()', () => {
     it('extracts the lang segment from a URL', () => {
         expect(getLangFromUrl(new URL('https://example.com/ca/el-drac'))).toBe('ca')
-        expect(getLangFromUrl(new URL('https://example.com/es/historia/origens'))).toBe('es')
+        expect(getLangFromUrl(new URL('https://example.com/en/historia/origens'))).toBe('en')
         expect(getLangFromUrl(new URL('https://example.com/en/'))).toBe('en')
     })
 
     it('returns the default lang (ca) for an unknown lang segment', () => {
         expect(getLangFromUrl(new URL('https://example.com/fr/page'))).toBe('ca')
+        expect(getLangFromUrl(new URL('https://example.com/es/page'))).toBe('ca')
         expect(getLangFromUrl(new URL('https://example.com/'))).toBe('ca')
     })
 })
@@ -48,7 +47,7 @@ describe('getLangFromUrl()', () => {
 describe('langUrl()', () => {
     it('builds a lang-prefixed URL for a given path', () => {
         expect(langUrl('ca', 'el-drac')).toBe('/ca/el-drac')
-        expect(langUrl('es', 'historia/origens')).toBe('/es/historia/origens')
+        expect(langUrl('en', 'historia/origens')).toBe('/en/historia/origens')
         expect(langUrl('en', 'contacte')).toBe('/en/contacte')
     })
 
@@ -67,8 +66,8 @@ describe('getStaticLangPaths()', () => {
     it('includes all supported languages', () => {
         const langs = getStaticLangPaths().map((p) => p.params.lang)
         expect(langs).toContain('ca')
-        expect(langs).toContain('es')
         expect(langs).toContain('en')
+        expect(langs).not.toContain('es')
     })
 })
 
@@ -80,18 +79,18 @@ describe('getAlternateUrls()', () => {
 
     it('correctly builds alternate URLs preserving the slug', () => {
         const alts = getAlternateUrls('/ca/el-drac')
-        expect(alts.find((a) => a.lang === 'es')?.url).toBe('/es/el-drac')
+        expect(alts.find((a) => a.lang === 'ca')?.url).toBe('/ca/el-drac')
         expect(alts.find((a) => a.lang === 'en')?.url).toBe('/en/el-drac')
     })
 
     it('handles root path', () => {
         const alts = getAlternateUrls('/ca/')
-        expect(alts.find((a) => a.lang === 'es')?.url).toBe('/es/')
+        expect(alts.find((a) => a.lang === 'ca')?.url).toBe('/ca/')
         expect(alts.find((a) => a.lang === 'en')?.url).toBe('/en/')
     })
 
     it('handles deeply nested paths', () => {
         const alts = getAlternateUrls('/ca/historia/origens')
-        expect(alts.find((a) => a.lang === 'es')?.url).toBe('/es/historia/origens')
+        expect(alts.find((a) => a.lang === 'en')?.url).toBe('/en/historia/origens')
     })
 })
