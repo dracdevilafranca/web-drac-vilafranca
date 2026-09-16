@@ -12,8 +12,6 @@ Desplegament: **Cloudflare Pages** (branca `main` → deploy automàtic via CI/C
 
 - **Astro** (SSG, adaptador Cloudflare) + **Tailwind CSS v4** (`@import "tailwindcss"`)
 - **TypeScript** estricte
-- **Cloudflare Functions** per a la API (`functions/api/reserva.ts`)
-- **Resend** per a l'enviament de correus de confirmació de reserves
 - **Vitest** per a tests, **ESLint** (flat config v9) per a linting
 - **GitHub Actions** CI/CD (`.github/workflows/ci.yml`)
 
@@ -25,10 +23,8 @@ src/
   i18n/              # ca.json, es.json, en.json + index.ts
   layouts/           # BaseLayout.astro (HTML base, SEO, JSON-LD)
   pages/[lang]/      # Totes les pàgines (SSG per lang: ca, es, en)
-  scripts/           # cart.ts (lògica carret, localStorage)
+  data/              # privacy.ts (text de la política de privacitat)
   styles/            # app.css (tema Tailwind + keyframes)
-functions/
-  api/reserva.ts     # POST handler: valida i envia correu via Resend
 public/
   _headers           # Security headers + cache headers per Cloudflare Pages
   data/products.json # Catàleg de productes (source of truth)
@@ -53,11 +49,17 @@ Les claus noves s'han d'afegir als tres fitxers (`ca.json`, `es.json`, `en.json`
 ### Implementat i funcional
 
 - **43 pàgines** generant correctament (build net, 0 errors)
-- **38 tests passant** (i18n, cart, reserva API)
+- **15 tests passant** (i18n)
 - **0 errors ESLint**
 - **CI/CD** via GitHub Actions (astro check → eslint → vitest → build)
-- **Botiga** amb modal de reserva, carret, focus trap, swipe tàctil
-- **GDPR compliant**: checkbox de consentiment obligatori, pàgina de privacitat (`/[lang]/privacitat`) en tres idiomes, avís de recollida en mà (no enviaments)
+- **Botiga** en mode catàleg (colors, carrusel d'imatges, swipe tàctil) amb avís de contacte per correu i recollida en mà
+- **Pàgina de privacitat** (`/[lang]/privacitat`) en tres idiomes; el web no recull dades amb formularis
+
+### Reserves aparcades
+
+La reserva en línia (API `functions/api/reserva.ts` amb Resend, modal de reserva, carret i modal de privacitat) s'ha retirat de `develop` i es conserva a la branca `feature/reserves`.
+Per recuperar-la: fer `git revert` del commit que la va retirar (`chore(shop): park online reservations`). Fusionar `feature/reserves` no la restaura.
+Abans de tornar-la a publicar cal protegir l'API contra abusos (Turnstile/honeypot, rate limiting, validar productes i consentiment al servidor).
 - **SEO**: sitemap (`@astrojs/sitemap`), hreflang, Open Graph, Twitter Card, JSON-LD Organization
 - **Security headers** (`_headers`): CSP, X-Frame-Options, Referrer-Policy, Permissions-Policy
 - **Animació canvas hero** pausada amb `IntersectionObserver` quan no és visible
@@ -89,6 +91,5 @@ Ordenades per impacte/esforç:
 
 ## Secrets necessaris (Cloudflare / GitHub)
 
-- `RESEND_API_KEY` — clau API de Resend per a l'enviament de correus
-- `FROM_EMAIL` — adreça remitent (ex: `reserves@dracdevilafranca.com`)
+- Cloudflare Pages: cap mentre les reserves estiguin aparcades (`RESEND_API_KEY` només cal a `feature/reserves`)
 - Per a GitHub Actions CI: no cal cap secret (el build és públic)
